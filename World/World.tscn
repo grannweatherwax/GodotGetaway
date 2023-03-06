@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://World/World.gd" type="Script" id=1]
 [ext_resource path="res://Tiles/city.meshlib" type="MeshLibrary" id=2]
 [ext_resource path="res://World/GridMap.gd" type="Script" id=3]
 [ext_resource path="res://World/Border.tscn" type="PackedScene" id=4]
+[ext_resource path="res://World/ObjectSpawner.tscn" type="PackedScene" id=5]
 
 [node name="World" type="Spatial" groups=["GameState"]]
 script = ExtResource( 1 )
@@ -22,3 +23,5 @@ __meta__ = {
 }
 
 [node name="Border" parent="GridMap" instance=ExtResource( 4 )]
+
+[node name="ObjectSpawner" parent="GridMap" instance=ExtResource( 5 )]

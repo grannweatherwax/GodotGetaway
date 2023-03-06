@@ -23,6 +23,7 @@ func _ready():
 		randomize()
 		make_map_border()
 		make_map()
+		record_tile_positions()
 		rpc("send_ready")
 
 # set the walls of the game space
@@ -183,6 +184,24 @@ func erase_walls():
 
 sync func place_cell(x, z, cell, cell_rotation):
 	set_cell_item(x, 0, z, cell, cell_rotation)
+
+# create list of which tiles are in which positions after grid has been procedurally generated
+func record_tile_positions():
+	var tiles = []
+	for x in range(0, width):
+		for z in range (0, height):
+			# set current position as variable within each iteration of loop
+			var current_cell = Vector3(x, 0, z)
+			# record which tile is at the current position for each loop
+			var current_tile_type = get_cell_item(current_cell.x, 0, current_cell.z)
+			# if the current tile is 0-15 (i.e. a road segment, not a building), then execute this
+			if current_tile_type < 15:
+				# append the current cell's Vector3 to the list of tiles
+				tiles.append(current_cell)
+	# establish the Vector2 map_size according to the width and height of the game map
+	var map_size = Vector2(width, height)
+	# call generate props according to the array of tiles with road in them and the Vector2 map_size
+	$ObjectSpawner.generate_props(tiles, map_size)
 
 # handle notifying host when players are ready
 sync func send_ready():
