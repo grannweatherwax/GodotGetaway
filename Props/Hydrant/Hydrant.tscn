@@ -91,7 +91,7 @@ script = ExtResource( 3 )
 
 [node name="FireHydrant" type="RigidBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 9 )
-mass = 300.0
+mass = 115.0
 contact_monitor = true
 sleeping = true
 
