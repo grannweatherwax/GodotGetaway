@@ -9,6 +9,8 @@ var number_of_traffic_cones = 40
 var number_of_hydrants = 50
 var number_of_streetlights = 50 # the more lights and shadows we have, the slower the game
 var number_of_ramps = 25
+var number_of_scaffolding = 30
+
 
 # handle generation and placement of props in game map
 func generate_props(tile_list, size):
@@ -19,6 +21,7 @@ func generate_props(tile_list, size):
 	place_traffic_cones()
 	place_hydrants()
 	place_streetlights()
+	place_scaffolding()
 
 # handles returning a randomized list of an appropriate length for prop placement
 func random_tile(tile_count):
@@ -68,7 +71,7 @@ func place_ramps(tile_list):
 		var allowed_rotations = $ObjectRotLookup.lookup_rotation(tile_type)
 		if not allowed_rotations == null:
 			var tile_rotation = allowed_rotations[randi() % allowed_rotations.size() -1] * -1
-			tile.y = tile.y + 1 # adjustment for height of prop as needed
+			tile.y = tile.y + 0.75 # adjustment for height of prop as needed
 			# remote call to spawn prop 
 			rpc("spawn_ramps", tile, tile_rotation)
 		# remove the completed tile from the list of tiles for placing prop
@@ -95,7 +98,7 @@ func place_billboards():
 		var allowed_rotations = $ObjectRotLookup.lookup_rotation(tile_type)
 		if not allowed_rotations == null:
 			var tile_rotation = allowed_rotations[randi() % allowed_rotations.size() -1] * -1
-			tile.y = tile.y + 1 # adjustment for height of prop as needed
+			tile.y = tile.y #+ 1 # adjustment for height of prop as needed
 			# remote call to spawn prop 
 			rpc("spawn_billboards", tile, tile_rotation)
 		# remove the completed tile from the list of tiles for placing props
@@ -149,7 +152,7 @@ func place_hydrants():
 		var allowed_rotations = $ObjectRotLookup.lookup_rotation(tile_type)
 		if not allowed_rotations == null:
 			var tile_rotation = allowed_rotations[randi() % allowed_rotations.size() -1] * -1
-			tile.y = tile.y + 1 # adjustment for height of prop spawn point as needed
+			tile.y = tile.y + 0.75 # adjustment for height of prop spawn point as needed
 			# remote call to spawn prop 
 			rpc("spawn_hydrants", tile, tile_rotation)
 		# remove the completed tile from the list of tiles for placing props
@@ -176,7 +179,7 @@ func place_streetlights():
 		var allowed_rotations = $ObjectRotLookup.lookup_rotation(tile_type)
 		if not allowed_rotations == null:
 			var tile_rotation = allowed_rotations[randi() % allowed_rotations.size() -1] * -1
-			tile.y = tile.y + 1 # adjustment for height of prop spawn point as needed
+			tile.y = tile.y + 0.75 # adjustment for height of prop spawn point as needed
 			# remote call to spawn prop 
 			rpc("spawn_streetlights", tile, tile_rotation)
 		# remove the completed tile from the list of tiles for placing props
@@ -192,3 +195,30 @@ sync func spawn_streetlights(tile, streetlight_rotation):
 	streetlight.rotation_degrees.y = streetlight_rotation
 	# add the translated and rotated prop instance to the scene on the correct tile
 	add_child(streetlight, true)
+
+# handles putting the scaffolding in the scene
+func place_scaffolding():
+	var tile_list = random_tile(number_of_scaffolding)
+	for i in range(number_of_scaffolding):
+		var tile = tile_list[0]
+		var tile_type = get_node("..").get_cell_item(tile.x, 0, tile.z)
+		# send the tile type we have a look up possible rotations for the props
+		var allowed_rotations = $ObjectRotLookup.lookup_rotation(tile_type)
+		if not allowed_rotations == null:
+			var tile_rotation = allowed_rotations[randi() % allowed_rotations.size() -1] * -1
+			tile.y = tile.y + 0.5 # adjustment for height of prop spawn point as needed
+			# remote call to spawn prop 
+			rpc("spawn_scaffolding", tile, tile_rotation)
+		# remove the completed tile from the list of tiles for placing props
+		tile_list.pop_front()
+
+# handles spawning the scaffolding
+sync func spawn_scaffolding(tile, scaffolding_rotation):
+	# preload the prop scene instance for faster loading
+	var scaffolding = preload("res://Props/Scaffolding/Scaffolding.tscn").instance()
+	# Vector3 coordinates involve converting to tile size of 20 and then adding 10 to offset origin to center for each
+	scaffolding.translation = Vector3((tile.x * 20) + 10, tile.y, (tile.z * 20) + 10)
+	# rotate the props instance according to the rotation parameter
+	scaffolding.rotation_degrees.y = scaffolding_rotation
+	# add the translated and rotated prop instance to the scene on the correct tile
+	add_child(scaffolding, true)
