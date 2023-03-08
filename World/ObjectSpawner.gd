@@ -74,7 +74,7 @@ func place_ramps(tile_list):
 		var allowed_rotations = $ObjectRotLookup.lookup_rotation(tile_type)
 		if not allowed_rotations == null:
 			var tile_rotation = allowed_rotations[randi() % allowed_rotations.size() -1] * -1
-			tile.y = tile.y + 0.75 # adjustment for height of prop as needed
+			tile.y = tile.y + 0.6 # adjustment for height of prop as needed
 			# remote call to spawn prop 
 			rpc("spawn_ramps", tile, tile_rotation)
 		# remove the completed tile from the list of tiles for placing prop

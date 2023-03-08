@@ -15,6 +15,7 @@ sync var players = {}
 var player_data = {"steer": 0, "engine": 0, "brakes": 0, "position": null}
 
 func _ready():
+	join_team()
 	players[name] = player_data
 	players[name].position = transform
 	
@@ -24,6 +25,18 @@ func _ready():
 
 func is_local_Player():
 	return name == str(Network.local_player_id)
+
+# handles attributing players to either the cops or robbers team
+func join_team():
+	# retrieve player dictionary settings and check which team
+	if Network.players[int(name)]["is_cop"]:
+		# add player to cops group and remove the robber mesh from player scene
+		add_to_group("cops")
+		$RobberMesh.queue_free()
+	else: 
+		# remove cop mesh from player scene
+		$CopMesh.queue_free()
+		
 
 # every frame, calculate these
 func _physics_process(delta):

@@ -4,6 +4,8 @@ onready var NameTextBox = $VBoxContainer/CenterContainer/GridContainer/NameTextb
 onready var port = $VBoxContainer/CenterContainer/GridContainer/PortTextbox
 onready var sel_IP = $VBoxContainer/CenterContainer/GridContainer/IPTextbox
 
+var is_cop = false
+
 func _ready():
 	NameTextBox.text = Saved.save_data["Player_name"]
 	sel_IP.text = Network.DEFAULT_IP
@@ -13,6 +15,8 @@ func _ready():
 func _on_HostButton_pressed():
 	# takes text entered in port textbox and sets it as the selected network port
 	Network.selected_port = int(port.text)
+	# stores the player's choice as cop or robber
+	Network.is_cop = is_cop
 	# creates the server
 	Network.create_server()
 	get_tree().call_group("HostOnly", "show")
@@ -25,6 +29,8 @@ func _on_JoinButton_pressed():
 	Network.selected_port = int(port.text)
 	# takes text entered in IP textbox and sets it as the selected network IP
 	Network.selected_IP = sel_IP.text
+	# stores the player's choice as cop or robber
+	Network.is_cop = is_cop
 	# connects to server created by host player
 	Network.connect_to_server()
 	# displays waiting room where joining players can be seen
@@ -48,3 +54,7 @@ func create_waiting_room():
 
 func _on_ReadyButton_pressed():
 	Network.start_game()
+
+# what team is the player joining
+func _on_TeamCheck_toggled(button_pressed):
+	is_cop = button_pressed

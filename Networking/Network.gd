@@ -16,6 +16,8 @@ var ready_players = 0
 signal player_disconnected
 signal server_disconnected
 
+var is_cop = false
+
 func _ready():
 	get_tree().connect("network_peer_disconnected", self, "_on_player_disconnect")
 	get_tree().connect("network_peer_connected", self, "_on_player_connected")
@@ -50,18 +52,22 @@ func add_to_player_list():
 	player_data = Saved.save_data
 	# add the player's player_data to the dictionary of players
 	players[local_player_id] = player_data
+	# add the key and value of "is_cop" to the player dictionary
+	players[local_player_id]["is_cop"] = is_cop
 
 # handle actions when player has connected to the server
 func _connected_to_server():
 	# add connected player to player list
 	add_to_player_list()
 	# remote procedure call, safe method, sends player info from the dictionary entry of local player id and the player's data
-	rpc("_send_player_info", local_player_id, player_data)
+	rpc("_send_player_info", local_player_id, player_data, is_cop)
 
 # handle sending the player's data
-remote func _send_player_info(id, player_info):
+remote func _send_player_info(id, player_info, cop_mode):
 	# set the player's dictionary entry according to their local player id and the player info passed in
 	players[id] = player_info
+	# set the player's status as cop or robber within the player dictionary
+	players[id]["is_cop"] = cop_mode
 	# run this if the player is the host
 	if get_tree().is_network_server():
 		# send the dictionary of players
