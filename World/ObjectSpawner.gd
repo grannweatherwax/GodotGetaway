@@ -4,6 +4,10 @@ var tiles = []
 var cafe_spots = []
 var map_size = Vector2()
 
+var tile_size = 20
+var tile_offset = 10
+
+var number_of_beacons = 20
 var number_of_parked_cars = 100
 var number_of_billboards = 75
 var number_of_traffic_cones = 40
@@ -18,6 +22,7 @@ func generate_props(tile_list, size, plazas):
 	tiles = tile_list
 	cafe_spots = plazas
 	map_size = size
+	place_beacon()
 	place_cars()
 	place_billboards()
 	place_traffic_cones()
@@ -35,6 +40,17 @@ func random_tile(tile_count):
 		var tile = tile_list[i]
 		selected_tiles.append(tile)
 	return selected_tiles
+
+func place_beacon():
+	var tile_list = random_tile(number_of_beacons)
+	for i in range(number_of_beacons):
+		var tile = tile_list[i]
+		rpc("spawn_beacons", tile)
+
+sync func spawn_beacons(tile):
+	var beacon = preload("res://Beacon/Beacon.tscn").instance()
+	beacon.translation = Vector3((tile.x * tile_size) + tile_offset, tile.y, (tile.z * tile_size) + tile_offset)
+	add_child(beacon, true)
 
 # handles putting the cars parked as props in the scene
 func place_cars():
@@ -59,7 +75,7 @@ sync func spawn_cars(tile, car_rotation):
 	# preload the prop scene instance for faster loading
 	var car = preload("res://Props/ParkedCars.tscn").instance()
 	# Vector3 coordinates involve converting to tile size of 20 and then adding 10 to offset origin to center for each
-	car.translation = Vector3((tile.x * 20) + 10, tile.y, (tile.z * 20) + 10)
+	car.translation = Vector3((tile.x * tile_size) + tile_offset, tile.y, (tile.z * tile_size) + tile_offset)
 	# rotate the prop instance according to the rotation parameter
 	car.rotation_degrees.y = car_rotation
 	# add the translated and rotated prop instance to the scene on the correct tile
@@ -85,7 +101,7 @@ sync func spawn_ramps(tile, ramp_rotation):
 	# preload the prop scene instance for faster loading
 	var ramp = preload("res://Props/Dumpster/Dumpster.tscn").instance()
 	# Vector3 coordinates involve converting to tile size of 20 and then adding 10 to offset origin to center for each
-	ramp.translation = Vector3((tile.x * 20) + 10, tile.y, (tile.z * 20) + 10)
+	ramp.translation = Vector3((tile.x * tile_size) + tile_offset, tile.y, (tile.z * tile_size) + tile_offset)
 	# rotate the prop instance according to the rotation parameter
 	ramp.rotation_degrees.y = ramp_rotation
 	# add the translated and rotated prop instance to the scene on the correct tile
@@ -112,7 +128,7 @@ sync func spawn_billboards(tile, billboard_rotation):
 	# preload the prop scene instance for faster loading
 	var billboard = preload("res://Props/Billboards/Billboard.tscn").instance()
 	# Vector3 coordinates involve converting to tile size of 20 and then adding 10 to offset origin to center for each
-	billboard.translation = Vector3((tile.x * 20) + 10, tile.y, (tile.z * 20) + 10)
+	billboard.translation = Vector3((tile.x * tile_size) + tile_offset, tile.y, (tile.z * tile_size) + tile_offset)
 	# rotate the prop instance according to the rotation parameter
 	billboard.rotation_degrees.y = billboard_rotation
 	# add the translated and rotated prop instance to the scene on the correct tile
@@ -139,7 +155,7 @@ sync func spawn_traffic_cones(tile, cone_rotation):
 	# preload the prop scene instance for faster loading
 	var traffic_cones = preload("res://Props/TrafficCones/TrafficCones.tscn").instance()
 	# Vector3 coordinates involve converting to tile size of 20 and then adding 10 to offset origin to center for each
-	traffic_cones.translation = Vector3((tile.x * 20) + 10, tile.y, (tile.z * 20) + 10)
+	traffic_cones.translation = Vector3((tile.x * tile_size) + tile_offset, tile.y, (tile.z * tile_size) + tile_offset)
 	# rotate the prop instance according to the rotation parameter
 	traffic_cones.rotation_degrees.y = cone_rotation
 	# add the translated and rotated prop instance to the scene on the correct tile
@@ -166,7 +182,7 @@ sync func spawn_hydrants(tile, hydrant_rotation):
 	# preload the prop scene instance for faster loading
 	var hydrants = preload("res://Props/Hydrant/Hydrant.tscn").instance()
 	# Vector3 coordinates involve converting to tile size of 20 and then adding 10 to offset origin to center for each
-	hydrants.translation = Vector3((tile.x * 20) + 10, tile.y, (tile.z * 20) + 10)
+	hydrants.translation = Vector3((tile.x * tile_size) + tile_offset, tile.y, (tile.z * tile_size) + tile_offset)
 	# rotate the props instance according to the rotation parameter
 	hydrants.rotation_degrees.y = hydrant_rotation
 	# add the translated and rotated prop instance to the scene on the correct tile
@@ -193,7 +209,7 @@ sync func spawn_streetlights(tile, streetlight_rotation):
 	# preload the prop scene instance for faster loading
 	var streetlight = preload("res://Props/StreetLight/StreetLight.tscn").instance()
 	# Vector3 coordinates involve converting to tile size of 20 and then adding 10 to offset origin to center for each
-	streetlight.translation = Vector3((tile.x * 20) + 10, tile.y, (tile.z * 20) + 10)
+	streetlight.translation = Vector3((tile.x * tile_size) + tile_offset, tile.y, (tile.z * tile_size) + tile_offset)
 	# rotate the props instance according to the rotation parameter
 	streetlight.rotation_degrees.y = streetlight_rotation
 	# add the translated and rotated prop instance to the scene on the correct tile
@@ -220,7 +236,7 @@ sync func spawn_scaffolding(tile, scaffolding_rotation):
 	# preload the prop scene instance for faster loading
 	var scaffolding = preload("res://Props/Scaffolding/Scaffolding.tscn").instance()
 	# Vector3 coordinates involve converting to tile size of 20 and then adding 10 to offset origin to center for each
-	scaffolding.translation = Vector3((tile.x * 20) + 10, tile.y, (tile.z * 20) + 10)
+	scaffolding.translation = Vector3((tile.x * tile_size) + tile_offset, tile.y, (tile.z * tile_size) + tile_offset)
 	# rotate the props instance according to the rotation parameter
 	scaffolding.rotation_degrees.y = scaffolding_rotation
 	# add the translated and rotated prop instance to the scene on the correct tile
@@ -248,7 +264,7 @@ sync func spawn_cafes(tile, cafe_rotation):
 	# preload the prop scene instance for faster loading
 	var cafe = preload("res://Props/Cafe/Cafe.tscn").instance()
 	# Vector3 coordinates involve converting to tile size of 20 and then adding 10 to offset origin to center for each
-	cafe.translation = Vector3((tile.x * 20) + 10, tile.y, (tile.z * 20) + 10)
+	cafe.translation = Vector3((tile.x * tile_size) + tile_offset, tile.y, (tile.z * tile_size) + tile_offset)
 	# rotate the props instance according to the rotation parameter
 	cafe.rotation_degrees.y = cafe_rotation
 	# add the translated and rotated prop instance to the scene on the correct tile

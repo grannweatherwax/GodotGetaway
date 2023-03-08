@@ -33,6 +33,7 @@ func join_team():
 	if Network.players[int(name)]["is_cop"]:
 		# add player to cops group and remove the robber mesh from player scene
 		add_to_group("cops")
+		collision_layer = 4
 		$RobberMesh.queue_free()
 	else: 
 		# remove cop mesh from player scene

@@ -175,3 +175,9 @@ Subsequent commits should reflect finer-grained changes to the code.
  ### 44. Grid References
  * Adding a grid reference to the minimap
  * Using Stepify
+ 
+ ### 45. Making Beacons
+ * Using Area and CSGCylinder nodes
+ * Having the beacons shrink over time when detecting a criminal player
+ 
+ 
