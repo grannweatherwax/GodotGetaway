@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Props/Chair Seat.material" type="Material" id=1]
 [ext_resource path="res://Props/MetalFurniture.material" type="Material" id=2]
 [ext_resource path="res://Props/Object.gd" type="Script" id=3]
+[ext_resource path="res://SFX/coneImpact.ogg" type="AudioStream" id=4]
 
 [sub_resource type="ArrayMesh" id=20]
 resource_name = "Props_Cylinder004"
@@ -35,6 +36,9 @@ surfaces/1 = {
 points = PoolVector3Array( -0.270069, 0.584921, -0.270069, -0.270069, 0.584921, 0.270069, -0.270069, 0.629982, -0.270069, 0.270069, 0.584921, -0.270069, -0.229305, -0.00444889, -0.242893, -0.244267, -0.00444889, -0.227877, 0.270069, 0.584921, 0.270069, -0.270069, 0.629982, 0.270069, -0.244267, -0.00444889, 0.227824, -0.229305, -0.00444889, 0.24284, -0.270069, 1.29005, -0.240037, -0.229305, 1.34555, -0.242893, 0.270069, 0.629982, -0.270069, 0.244214, -0.00444889, -0.227877, 0.229252, -0.00444889, -0.242893, 0.270069, 0.629982, 0.270069, 0.229252, -0.00444889, 0.24284, 0.244214, -0.00444889, 0.227824, -0.229305, 1.34555, -0.212861, -0.270069, 1.29005, -0.195044, -0.244267, 1.34555, -0.227877, 0.229252, 1.34555, -0.242893, 0.270069, 1.29005, -0.240037, 0.270069, 1.29005, -0.195044, 0.229252, 1.34555, -0.212861, 0.244214, 1.34555, -0.227877 )
 
 [node name="CafeChair" type="RigidBody"]
+continuous_cd = true
+contacts_reported = 1
+contact_monitor = true
 sleeping = true
 script = ExtResource( 3 )
 
@@ -56,6 +60,15 @@ __meta__ = {
 }
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource( 4 )
+unit_db = 5.0
+max_db = 5.0
+max_distance = 20.0
+bus = "SoundEffects"
+doppler_tracking = 2
+__meta__ = {
+"_editor_description_": ""
+}
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="sleeping_state_changed" from="." to="." method="_on_sleeping_state_changed"]

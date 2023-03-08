@@ -17,6 +17,9 @@ var cell_walls = {
 	Vector3(0,0,spacing): S, 
 	Vector3(-spacing,0,0): W}
 
+var plaza_tiles = [17, 20, 22, 25] # tile types which can accommodate cafe placement
+var cafe_spots = [] # location and rotation of tiles programmatically placed for cafe placement
+
 func _ready():
 	clear() # clear out all the stuff placed during level design
 	if Network.local_player_id == 1:
@@ -220,10 +223,18 @@ func record_tile_positions():
 			if current_tile_type < 15:
 				# append the current cell's Vector3 to the list of tiles
 				tiles.append(current_cell)
+			# if the current tile is in the array of plaza tile types, then execute this
+			elif current_tile_type in plaza_tiles:
+				# set the current tile's rotation as variable building location
+				var building_rotation = get_cell_item_orientation(current_cell.x, 0, current_cell.z)
+				# set building rotation and current location as variable plaza location
+				var plaza_location = [building_rotation, x, z]
+				# append plaza location to the array of cafe spots
+				cafe_spots.append(plaza_location)
 	# establish the Vector2 map_size according to the width and height of the game map
 	var map_size = Vector2(width, height)
 	# call generate props according to the array of tiles with road in them and the Vector2 map_size
-	$ObjectSpawner.generate_props(tiles, map_size)
+	$ObjectSpawner.generate_props(tiles, map_size, cafe_spots)
 
 # handle notifying host when players are ready
 sync func send_ready():

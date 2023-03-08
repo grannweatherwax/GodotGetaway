@@ -3,9 +3,9 @@ extends VehicleBody
 const MAX_STEER_ANGLE = 0.35
 const STEER_SPEED = 1
 
-const MAX_ENGINE_FORCE = 400
+const MAX_ENGINE_FORCE = 300
 const MAX_BRAKE_FORCE = 20
-const MAX_SPEED = 60
+const MAX_SPEED = 50
 
 
 var steer_target = 0.0	# where does player want wheels to go

@@ -1,6 +1,7 @@
 extends Node
 
 var tiles = []
+var cafe_spots = []
 var map_size = Vector2()
 
 var number_of_parked_cars = 100
@@ -10,11 +11,12 @@ var number_of_hydrants = 50
 var number_of_streetlights = 50 # the more lights and shadows we have, the slower the game
 var number_of_ramps = 25
 var number_of_scaffolding = 30
-
+var number_of_cafes = 20
 
 # handle generation and placement of props in game map
-func generate_props(tile_list, size):
+func generate_props(tile_list, size, plazas):
 	tiles = tile_list
+	cafe_spots = plazas
 	map_size = size
 	place_cars()
 	place_billboards()
@@ -22,6 +24,7 @@ func generate_props(tile_list, size):
 	place_hydrants()
 	place_streetlights()
 	place_scaffolding()
+	place_cafes()
 
 # handles returning a randomized list of an appropriate length for prop placement
 func random_tile(tile_count):
@@ -222,3 +225,31 @@ sync func spawn_scaffolding(tile, scaffolding_rotation):
 	scaffolding.rotation_degrees.y = scaffolding_rotation
 	# add the translated and rotated prop instance to the scene on the correct tile
 	add_child(scaffolding, true)
+
+func place_cafes():
+	cafe_spots.shuffle()
+	for i in range(number_of_cafes):
+		var tile = cafe_spots[i]
+		var building_rotation = tile[0]
+		var tile_position = Vector3(tile[1], 0.5, tile[2])
+		var tile_rotation = 0
+		
+		if building_rotation == 10:
+			tile_rotation = 180
+		elif building_rotation == 16:
+			tile_rotation = 90
+		elif building_rotation == 22:
+			tile_rotation = 270
+		
+		rpc("spawn_cafes", tile_position, tile_rotation)
+
+# handles spawning the scaffolding
+sync func spawn_cafes(tile, cafe_rotation):
+	# preload the prop scene instance for faster loading
+	var cafe = preload("res://Props/Cafe/Cafe.tscn").instance()
+	# Vector3 coordinates involve converting to tile size of 20 and then adding 10 to offset origin to center for each
+	cafe.translation = Vector3((tile.x * 20) + 10, tile.y, (tile.z * 20) + 10)
+	# rotate the props instance according to the rotation parameter
+	cafe.rotation_degrees.y = cafe_rotation
+	# add the translated and rotated prop instance to the scene on the correct tile
+	add_child(cafe, true)

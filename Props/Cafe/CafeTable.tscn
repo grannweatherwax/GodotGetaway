@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Props/Table Top.material" type="Material" id=1]
 [ext_resource path="res://Props/MetalFurniture.material" type="Material" id=2]
 [ext_resource path="res://Props/Object.gd" type="Script" id=3]
+[ext_resource path="res://SFX/coneImpact.ogg" type="AudioStream" id=4]
 
 [sub_resource type="ArrayMesh" id=10]
 resource_name = "Props_Cylinder002"
@@ -59,6 +60,9 @@ points = PoolVector3Array( 0.37618, -0.804689, 0.479461, 0.37618, -0.760346, 0.4
 points = PoolVector3Array( 0.213934, -0.0522789, 0.2139, -0.00890563, -0.289928, -0.00900753, -0.00904753, -0.245142, -0.00915889, 0.0643523, -0.217017, -0.0140308, 0.125375, -0.0522789, 0.184415, 0.0132825, -0.301197, 0.0451888, 0.0664295, -0.288298, 0.00738861, 0.184386, -0.0522789, 0.125375, 0.154902, -0.0670431, 0.228689, -0.00737704, -0.273534, 0.0516393, 0.213934, -0.0818073, 0.199134, 0.125375, -0.0522789, 0.140141, 0.199138, -0.0818073, 0.140141, -0.00737704, -0.229288, 0.0221312, 0.110644, -0.229288, 0.0811475, 0.140128, -0.0670431, 0.110656, 0.00739727, -0.214523, 0.00738861 )
 
 [node name="CafeTable" type="RigidBody"]
+continuous_cd = true
+contacts_reported = 1
+contact_monitor = true
 sleeping = true
 script = ExtResource( 3 )
 __meta__ = {
@@ -98,6 +102,15 @@ shape = SubResource( 18 )
 shape = SubResource( 19 )
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource( 4 )
+unit_db = 5.0
+max_db = 5.0
+max_distance = 20.0
+bus = "SoundEffects"
+doppler_tracking = 2
+__meta__ = {
+"_editor_description_": ""
+}
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 10.0
