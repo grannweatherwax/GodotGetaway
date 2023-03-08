@@ -21,16 +21,26 @@ func _physics_process(delta):
 		$CSGCylinder.scale.x = 1
 		$CSGCylinder.scale.z = 1
 
+# handles behavior when player enters beacon body
+# !! unclear whether non playable physics bodies can trigger the countdown and collect payout
 func _on_Beacon_body_entered(body):
+	# assign player as variable value for further actions
 	player = body
+	# start the timer countdown
 	$Timer.start()
+	# show the location of the beacon to all players from now on
 	show()
 
-
+# handles behavior when player exits beacon body
 func _on_Beacon_body_exited(body):
+	# stop timer countdown
 	$Timer.stop()
+	# clear assignation of player from variable
 	player = null
 
-
+# handles behavior when timer has expired
 func _on_Timer_timeout():
+	# call beacon_emptied function from player to add payoff money to total holdings
+	player.beacon_emptied()
+	# clear this scene from the world
 	queue_free()

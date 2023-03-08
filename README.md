@@ -180,4 +180,8 @@ Subsequent commits should reflect finer-grained changes to the code.
  * Using Area and CSGCylinder nodes
  * Having the beacons shrink over time when detecting a criminal player
  
+ ### 46. Creating Money
+ * Showing the player how much money they're carrying
+ * Updating money pickups over the network
+ 
  
