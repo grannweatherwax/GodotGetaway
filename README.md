@@ -171,3 +171,7 @@ Subsequent commits should reflect finer-grained changes to the code.
  * Using multiple cameras at once
  * Viewports and ViewportContainers
  * Adjusting the minimap with player speed
+ 
+ ### 44. Grid References
+ * Adding a grid reference to the minimap
+ * Using Stepify
