@@ -184,4 +184,9 @@ Subsequent commits should reflect finer-grained changes to the code.
  * Showing the player how much money they're carrying
  * Updating money pickups over the network
  
+ ### 47. Delivering Money
+ * Creating a goal
+ * Making sure that goals and beacons don't overlap
+ * Delivering money
+ 
  

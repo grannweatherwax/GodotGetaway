@@ -42,15 +42,22 @@ func random_tile(tile_count):
 	return selected_tiles
 
 func place_beacon():
-	var tile_list = random_tile(number_of_beacons)
+	var tile_list = random_tile(number_of_beacons + 1)
 	for i in range(number_of_beacons):
-		var tile = tile_list[i]
+		var tile = tile_list[0]
 		rpc("spawn_beacons", tile)
+		tile_list.pop_front()
+	rpc("spawn_goal", tile_list[0])
 
 sync func spawn_beacons(tile):
 	var beacon = preload("res://Beacon/Beacon.tscn").instance()
 	beacon.translation = Vector3((tile.x * tile_size) + tile_offset, tile.y, (tile.z * tile_size) + tile_offset)
 	add_child(beacon, true)
+
+sync func spawn_goal(tile):
+	var goal = preload("res://Beacon/Goal.tscn").instance()
+	goal.translation = Vector3((tile.x * tile_size) + tile_offset, tile.y, (tile.z * tile_size) + tile_offset)
+	add_child(goal, true)
 
 # handles putting the cars parked as props in the scene
 func place_cars():
