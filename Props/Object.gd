@@ -8,13 +8,13 @@ func _on_Timer_timeout():
 	queue_free()
 
 # handles collision behavior for the cone
-func _on_Cone__body_entered(body):
+func _on_body_entered(body):
 	# if the sfx isn't already playing, play it
 	if not $AudioStreamPlayer3D.playing:
 		$AudioStreamPlayer3D.play()
 
 # handles cone's sleeping state changes
-func _on_Cone__sleeping_state_changed():
+func _on_sleeping_state_changed():
 	# timer is allowed to start if the cone isn't sleeping and it's not the spawn collision
 	if not sleeping and has_finished_spawning:
 		$Timer.start()

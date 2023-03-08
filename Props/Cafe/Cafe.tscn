@@ -1,0 +1,66 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Props/Cafe/CafeTable.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Props/Cafe/CafeChair.tscn" type="PackedScene" id=2]
+
+[node name="Cafe" type="Spatial"]
+
+[node name="CafeTable " parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.12085, 0.847634, 1.87637 )
+
+[node name="CafeChair " parent="." instance=ExtResource( 2 )]
+transform = Transform( 0.81531, 0, 0.579025, 0, 1, 0, -0.579025, 0, 0.81531, -2.90995, 0.677628, 0.678296 )
+
+[node name="CafeChair 2" parent="." instance=ExtResource( 2 )]
+transform = Transform( 0.583158, 0, -0.812358, 0, 1, 0, 0.812358, 0, 0.583158, -0.82093, 0.677628, 1.39201 )
+
+[node name="CafeChair 3" parent="." instance=ExtResource( 2 )]
+transform = Transform( -0.0934131, 0, 0.995627, 0, 1, 0, -0.995627, 0, -0.0934131, -3.48734, 0.677628, 2.22601 )
+
+[node name="CafeChair 4" parent="." instance=ExtResource( 2 )]
+transform = Transform( -0.961889, 0, 0.273439, 0, 1, 0, -0.273439, 0, -0.961889, -2.19623, 0.677628, 3.4289 )
+
+[node name="CafeTable 2" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.600406, 0, -0.799695, 0, 1, 0, 0.799695, 0, 0.600406, -5.93487, 0.847634, 2.99033 )
+
+[node name="CafeChair 5" parent="." instance=ExtResource( 2 )]
+transform = Transform( 0.952561, 0, -0.304349, 0, 1, 0, 0.304349, 0, 0.952561, -5.45056, 0.677628, 1.63996 )
+
+[node name="CafeChair 6" parent="." instance=ExtResource( 2 )]
+transform = Transform( -0.299507, 0, -0.954094, 0, 1, 0, 0.954094, 0, -0.299507, -4.76705, 0.677628, 3.73905 )
+
+[node name="CafeChair 7" parent="." instance=ExtResource( 2 )]
+transform = Transform( 0.740113, 0, 0.672483, 0, 1, 0, -0.672483, 0, 0.740113, -7.03493, 0.677628, 2.10748 )
+
+[node name="CafeChair 8" parent="." instance=ExtResource( 2 )]
+transform = Transform( -0.358857, 0, 0.933393, 0, 1, 0, -0.933393, 0, -0.358857, -7.22169, 0.677628, 3.86219 )
+
+[node name="CafeTable 3" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.500831, 0, -0.865545, 0, 1, 0, 0.865545, 0, 0.500831, -1.71238, 0.847634, 6.35244 )
+
+[node name="CafeChair 9" parent="." instance=ExtResource( 2 )]
+transform = Transform( 0.909505, 0, -0.415694, 0, 1, 0, 0.415694, 0, 0.909505, -1.0706, 0.677628, 5.06941 )
+
+[node name="CafeChair 10" parent="." instance=ExtResource( 2 )]
+transform = Transform( -0.411069, 0, -0.911604, 0, 1, 0, 0.911604, 0, -0.411069, -0.642109, 0.677628, 7.235 )
+
+[node name="CafeChair 11" parent="." instance=ExtResource( 2 )]
+transform = Transform( 0.814976, 0, 0.579494, 0, 1, 0, -0.579494, 0, 0.814976, -2.6994, 0.677628, 5.3448 )
+
+[node name="CafeChair 12" parent="." instance=ExtResource( 2 )]
+transform = Transform( -0.24507, 0, 0.969505, 0, 1, 0, -0.969505, 0, -0.24507, -3.09393, 0.677628, 7.06475 )
+
+[node name="CafeTable 4" parent="." instance=ExtResource( 1 )]
+transform = Transform( -0.205094, 0, 0.978742, 0, 1, 0, -0.978742, 0, -0.205094, -5.67281, 0.847634, 6.36451 )
+
+[node name="CafeChair 13" parent="." instance=ExtResource( 2 )]
+transform = Transform( -0.733931, 0, 0.679224, 0, 1, 0, -0.679224, 0, -0.733931, -6.68358, 0.677628, 7.38255 )
+
+[node name="CafeChair 14" parent="." instance=ExtResource( 2 )]
+transform = Transform( 0.675487, 0, 0.737372, 0, 1, 0, -0.737372, 0, 0.675487, -6.41348, 0.677628, 5.19156 )
+
+[node name="CafeChair 15" parent="." instance=ExtResource( 2 )]
+transform = Transform( -0.955304, 0, -0.295625, 0, 1, 0, 0.295625, 0, -0.955304, -5.05034, 0.677628, 7.63024 )
+
+[node name="CafeChair 16" parent="." instance=ExtResource( 2 )]
+transform = Transform( -0.0703485, 0, -0.997522, 0, 1, 0, 0.997522, 0, -0.0703485, -4.13782, 0.677628, 6.11987 )

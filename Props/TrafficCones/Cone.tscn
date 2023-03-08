@@ -4,7 +4,7 @@
 [ext_resource path="res://Props/ConeReflector.material" type="Material" id=2]
 [ext_resource path="res://Props/ConeBase.material" type="Material" id=3]
 [ext_resource path="res://SFX/coneImpact.ogg" type="AudioStream" id=4]
-[ext_resource path="res://Props/TrafficCones/Cone.gd" type="Script" id=5]
+[ext_resource path="res://Props/Object.gd" type="Script" id=5]
 
 [sub_resource type="ArrayMesh" id=7]
 resource_name = "Props_Cylinder001"
@@ -51,7 +51,7 @@ points = PoolVector3Array( -0.352325, 0, -0.0944097, 0.390604, 0.0772538, 0.0209
 [sub_resource type="ConvexPolygonShape" id=9]
 points = PoolVector3Array( -0.055804, 0.961719, 0.0192853, -0.221423, 0.111423, 0.0125061, 0.213027, 0.111461, -0.0431152, 0.0576829, 0.967301, -0.00889354, 0.0989177, 0.112253, -0.194094, -0.118211, 0.11184, 0.185935, -0.12122, 0.11108, -0.188132, 0.196487, 0.112358, 0.0880224, -0.0274984, 0.950187, -0.0555393, 0.0100484, 0.966212, 0.0575528, -0.204347, 0.110689, -0.0899519, 0.0880029, 0.112341, 0.196576, -0.00973639, 0.111586, -0.221344, -0.183359, 0.111846, 0.120741, 0.0284417, 0.949352, -0.0554286, 0.180907, 0.113016, -0.115178, -0.0431668, 0.111448, 0.213078, 0.0468485, 0.956909, 0.0375666, -0.055547, 0.950245, -0.0275019, -0.0368236, 0.958976, 0.0471158, -0.188087, 0.111087, -0.121218, 0.120715, 0.11185, -0.183363, -0.0899537, 0.110679, -0.204395, 0.207302, 0.112522, 0.044602, 0.0446129, 0.112512, 0.207349, 0.0561803, 0.920276, -0.0366639, 0.0125061, 0.111423, -0.221423, 0.0575466, 0.966409, 0.0100553, -0.0182913, 0.962625, -0.0559212, -0.00892924, 0.967245, 0.0577107, -0.221343, 0.111589, -0.00969384, -0.0463799, 0.961446, -0.0369912, -0.194049, 0.112262, 0.0989157, 0.16985, 0.114348, 0.117105, -0.065098, 0.923527, -0.00882063, 0.106556, 0.114348, 0.180398, 0.038189, 0.868518, 0.06645, 0.00983055, 0.922593, -0.0649402, -0.0275995, 0.942573, 0.056816, -0.0554286, 0.949352, 0.0284417, 0.056787, 0.942616, -0.0276021, 0.0471263, 0.959056, -0.0367946, -0.0559387, 0.96276, -0.0182602, 0.0664504, 0.86852, 0.0381892, -0.00885449, 0.923378, -0.0650728, 0.0192853, 0.961719, -0.055804, -0.03702, 0.96136, -0.0463709, 0.180353, 0.114361, 0.106513 )
 
-[node name="Cone " type="RigidBody"]
+[node name="Cone" type="RigidBody"]
 continuous_cd = true
 contacts_reported = 1
 contact_monitor = true
@@ -82,6 +82,6 @@ max_distance = 20.0
 bus = "SoundEffects"
 doppler_tracking = 2
 
-[connection signal="body_entered" from="." to="." method="_on_Cone__body_entered"]
-[connection signal="sleeping_state_changed" from="." to="." method="_on_Cone__sleeping_state_changed"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="sleeping_state_changed" from="." to="." method="_on_sleeping_state_changed"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
