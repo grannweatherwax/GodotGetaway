@@ -43,7 +43,7 @@ func place_cars():
 		var allowed_rotations = $ObjectRotLookup.lookup_rotation(tile_type)
 		if not allowed_rotations == null:
 			var tile_rotation = allowed_rotations[randi() % allowed_rotations.size() -1] * -1
-			tile.y = tile.y + 1 # adjustment for height of prop as needed
+			tile.y = tile.y + 0.5 # adjustment for height of prop as needed
 			# remote call to spawn prop 
 			rpc("spawn_cars", tile, tile_rotation)
 		# remove the completed tile from the list of tiles for placing prop
@@ -125,7 +125,7 @@ func place_traffic_cones():
 		var allowed_rotations = $ObjectRotLookup.lookup_rotation(tile_type)
 		if not allowed_rotations == null:
 			var tile_rotation = allowed_rotations[randi() % allowed_rotations.size() -1] * -1
-			tile.y = tile.y + 1 # adjustment for height of prop spawn point as needed
+			tile.y = tile.y + 0.5 # adjustment for height of prop spawn point as needed
 			# remote call to spawn prop 
 			rpc("spawn_traffic_cones", tile, tile_rotation)
 		# remove the completed tile from the list of tiles for placing props

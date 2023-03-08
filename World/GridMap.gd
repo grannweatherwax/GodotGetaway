@@ -44,15 +44,37 @@ func make_blank_map():
 		for z in height:
 			var possible_rotations = [0, 10, 16, 22]
 			var building_rotation = possible_rotations[randi()%4]
-			var building = pick_building()
+			var building = pick_building(x, z)
 			# set the cell tile to the location in each loop
 			# set_cell_item(x, 0, z, building, building_rotation) # set cell for non-networked generation
 			rpc("place_cell", x, z, building, building_rotation) # set cell for networked generation
 
-func pick_building():
+func pick_building(x, z):
 	var chance_of_skyscraper = 1
 	var skyscraper = 16
-	var possible_buildings = [17, 18, 19, 20, 21, 22, 23, 24]
+	
+	# define which buildings are associated with each neighborhood
+	var neighborhood_1 = [17, 18, 19]
+	var neighborhood_2 = [20, 21]
+	var neighborhood_3 = [22, 23, 24]
+	var neighborhood_4 = [25, 26, 27]
+	
+	var possible_buildings
+	
+	# if we're on the ne quad of the map
+	if x >= width/2 and z >= height/2:
+		possible_buildings = neighborhood_2
+	# else if we're on the nw quad of the map
+	elif x <= width/2 and z >= height/2:
+		possible_buildings = neighborhood_3
+	# else if we're on the se quad of the map
+	elif x >= width/2 and z <= height/2:
+		possible_buildings = neighborhood_4
+	# else if we're on the sw quad of the map
+	else:
+		possible_buildings = neighborhood_1
+	
+	
 	var building
 	if (randi() %99) +1 <= chance_of_skyscraper:
 		building = skyscraper
