@@ -9,9 +9,12 @@ func _on_Timer_timeout():
 
 # handles collision behavior for the cone
 func _on_body_entered(body):
-	# if the sfx isn't already playing, play it
-	if not $AudioStreamPlayer3D.playing:
-		$AudioStreamPlayer3D.play()
+	if has_finished_spawning == true: 
+		# if the sfx isn't already playing, play it
+		if not $AudioStreamPlayer3D.playing:
+			$AudioStreamPlayer3D.play()
+	else:
+		pass
 
 # handles cone's sleeping state changes
 func _on_sleeping_state_changed():
