@@ -165,3 +165,9 @@ Subsequent commits should reflect finer-grained changes to the code.
  * Change the player mesh
  * Add cops to a group
  * Use collision layers
+ 
+ ### 43. MiniMap
+ * Setting up a second camera as a minimap
+ * Using multiple cameras at once
+ * Viewports and ViewportContainers
+ * Adjusting the minimap with player speed

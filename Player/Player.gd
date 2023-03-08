@@ -12,7 +12,7 @@ var steer_target = 0.0	# where does player want wheels to go
 var steer_angle = 0.0	# where are the wheels now
 
 sync var players = {}
-var player_data = {"steer": 0, "engine": 0, "brakes": 0, "position": null}
+var player_data = {"steer": 0, "engine": 0, "brakes": 0, "position": null, "speed": 0}
 
 func _ready():
 	join_team()
@@ -21,6 +21,7 @@ func _ready():
 	
 	if not is_local_Player():
 		$Camera.queue_free()
+		$GUI.queue_free()
 
 
 func is_local_Player():
@@ -51,11 +52,12 @@ func _physics_process(delta):
 
 # to drive the car, calculate these behaviors
 func drive(delta):
+	var speed = players[name].speed
 	var steering_value = apply_steering(delta)
-	var throttle = apply_throttle()
+	var throttle = apply_throttle(speed)
 	var brakes = apply_brakes()
 	
-	update_server(name, steering_value, throttle, brakes)
+	update_server(name, steering_value, throttle, brakes, speed)
 
 # every frame, calculate and return the car's steering angle
 func apply_steering(delta):
@@ -77,12 +79,12 @@ func apply_steering(delta):
 	return steer_angle
 
 # every frame, calculate and return the car's engine force
-func apply_throttle():
+func apply_throttle(speed):
 	var throttle_val = 0
 	var forward = Input.get_action_strength("forward")
 	var back = Input.get_action_strength("back")
 	
-	if linear_velocity.length() < MAX_SPEED:
+	if speed < MAX_SPEED:
 		if back: 
 			throttle_val = -back
 		elif forward:
@@ -101,17 +103,19 @@ func apply_brakes():
 	return brake_val * MAX_BRAKE_FORCE
 
 # tell the server all of the information relating to player position based on physics controls
-func update_server(id, steering_value, throttle, brakes):
+func update_server(id, steering_value, throttle, brakes, speed):
 	if not Network.local_player_id == 1:
-		rpc_unreliable_id(1, "manage_clients", id, steering_value, throttle, brakes)
+		rpc_unreliable_id(1, "manage_clients", id, steering_value, throttle, brakes, speed)
 	else:
-		manage_clients(id, steering_value, throttle, brakes)
+		manage_clients(id, steering_value, throttle, brakes, speed)
+	get_tree().call_group("Interface", "update_speed", speed)
 
 # handle keeping client players location and control status up to date
-sync func manage_clients(id, steering_value, throttle, brakes):
+sync func manage_clients(id, steering_value, throttle, brakes, speed):
 	players[id].steer = steering_value
 	players[id].engine = throttle
 	players[id].brakes = brakes
 	players[id].position = transform
+	players[id].speed = linear_velocity.length()
 	rset_unreliable("players", players)
 	
