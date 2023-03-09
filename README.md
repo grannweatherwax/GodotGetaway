@@ -211,4 +211,8 @@ Subsequent commits should reflect finer-grained changes to the code.
  ### 52. Networking Sirens
  * Making sirens work on all machines
  
+ ### 53. Player Billboards
+ * Displaying 2D information over player characters
+ * Setting up a QuadMesh to work with a Viewport
+ 
  
