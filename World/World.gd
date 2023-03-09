@@ -1,5 +1,10 @@
 extends Spatial
 
+var money_stashed = 0
+var money_recovered = 0
+export var criminal_victory_score = 3000
+export var cop_victory_score = 3000
+
 func _enter_tree():
 	get_tree().paused = true
 
@@ -31,3 +36,21 @@ func unpause():
 	spawn_local_player()
 	# tell every other machine on the network to spawn me as well
 	rpc("spawn_remote_player", Network.local_player_id)
+
+# handles updating money stashed and updating money recovered
+remote func update_gamestate(stashed, recovered):
+	# if player is the host, run this locally
+	if Network.local_player_id == 1:
+		money_stashed += stashed
+		money_recovered += recovered
+		check_win_conditions()
+	# if player is a client, run this remotely on the host
+	else: 
+		rpc_id(1, "update_gamestate", stashed, recovered)
+
+# handles testing whether cops or robbers have reached a win state
+func check_win_conditions():
+	if money_stashed >= criminal_victory_score:
+		get_tree().call_group("Announcements", "victory", true)
+	elif money_recovered >= cop_victory_score:
+		get_tree().call_group("Announcements", "victory", false)

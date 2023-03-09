@@ -201,6 +201,7 @@ remote func display_money(cash):
 func money_delivered():
 	# within the group Announcements, run money_stashed function and pass in player name and money parameters
 	get_tree().call_group("Announcements", "money_stashed", Saved.save_data["Player_name"], money)
+	get_tree().call_group("GameState", "update_gamestate", money, 0)
 	# reset player's money to zero
 	money = 0
 	# run manage money now that everything is updated
@@ -211,6 +212,8 @@ func _on_Player_body_entered(body):
 	if body.has_node("Money"):
 		body.queue_free()
 		money += money_drop
+		if is_in_group("cops"):
+			get_tree().call_group("GameState", "update_gamestate", 0, money)
 	elif money > 0 and not is_in_group("cops"):
 		spawn_money()
 		money -= money_drop

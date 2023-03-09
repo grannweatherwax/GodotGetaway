@@ -220,4 +220,9 @@ Subsequent commits should reflect finer-grained changes to the code.
  * Making the Robber billboard display their arrest status
  * Linking the arrest mechanic to the siren
  
+ ### 55. Win Conditions
+ * Setting Win Conditions for each team
+ * Checking the Win Conditions
+ * Announcing that the game is over
+ 
  
