@@ -215,4 +215,9 @@ Subsequent commits should reflect finer-grained changes to the code.
  * Displaying 2D information over player characters
  * Setting up a QuadMesh to work with a Viewport
  
+ ### 54. Robber Detector
+ * Setting up an Area to detect Robbers
+ * Making the Robber billboard display their arrest status
+ * Linking the arrest mechanic to the siren
+ 
  

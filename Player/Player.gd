@@ -1,5 +1,6 @@
 extends VehicleBody
 
+# vehicular control variables
 const MAX_STEER_ANGLE = 0.35
 const STEER_SPEED = 1
 
@@ -7,16 +8,22 @@ const MAX_ENGINE_FORCE = 300
 const MAX_BRAKE_FORCE = 20
 const MAX_SPEED = 50
 
-
 var steer_target = 0.0	# where does player want wheels to go
 var steer_angle = 0.0	# where are the wheels now
 
+# money management variables
 var money = 0
 var money_drop = 50
 var money_per_beacon = 1000
 
+# arrest progress variables
+export var max_arrest_value = 750
+var arrest_value = 0
+var criminal_detected = false
+
 var siren = false
 
+# player sync data
 sync var players = {}
 var player_data = {
 		"steer": 0, 
@@ -30,6 +37,7 @@ var player_data = {
 
 func _ready():
 	join_team()
+	$PlayerBillboard/Viewport/TextureProgress.max_value = max_arrest_value
 	players[name] = player_data
 	players[name].position = transform
 	$PlayerBillboard/Viewport/PlayerLabel.text = Network.players[int(name)]["Player_name"]
@@ -74,6 +82,9 @@ func _physics_process(delta):
 	
 	if is_in_group("cops"):
 		check_siren()
+	
+	if criminal_detected:
+		increment_arrest_value()
 
 # to drive the car, calculate these behaviors
 func drive(delta):
@@ -235,12 +246,34 @@ remote func toggle_siren(id, siren_state):
 
 func check_siren():
 	if players[name]["siren"]:
+		# siren is on, so monitor whether cop is in arresting range
+		$Siren/ArrestArea.monitoring = true
+		# if the siren stream isn't already playing, play it now
 		if not $Siren/AudioStreamPlayer3D.playing:
 			$Siren/AudioStreamPlayer3D.play()
+		# show the police car roof lights
 		$Siren/SirenMesh/SpotLight.show()
 		$Siren/SirenMesh/SpotLight2.show()
 	else:
+		# siren is off, so don't monitor whether cop is in arresting range
+		$Siren/ArrestArea.monitoring = false
+		# turn off the siren audio
 		$Siren/AudioStreamPlayer3D.stop()
+		# show the police car roof lights
 		$Siren/SirenMesh/SpotLight.hide()
 		$Siren/SirenMesh/SpotLight2.hide()
-		
+
+# handles detecting when robber car is in arresting distance
+func _on_ArrestArea_body_entered(body):
+	body.criminal_detected = true
+
+# handles detecting when robber car is no longer in arresting distance
+func _on_ArrestArea_body_exited(body):
+	body.criminal_detected = false
+
+# handles progress toward completed arrest
+func increment_arrest_value():
+	# increment
+	arrest_value += 1
+	# update player billboard to show new value
+	$PlayerBillboard/Viewport/TextureProgress.value = arrest_value
