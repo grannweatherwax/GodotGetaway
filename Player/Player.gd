@@ -176,8 +176,11 @@ remote func display_money(cash):
 	$GUI/ColorRect/VBoxContainer/MoneyLabel.text = "$" + str(cash)
 
 func money_delivered():
-	print("delivering " + str(money))
+	# within the group Announcements, run money_stashed function and pass in player name and money parameters
+	get_tree().call_group("Announcements", "money_stashed", Saved.save_data["Player_name"], money)
+	# reset player's money to zero
 	money = 0
+	# run manage money now that everything is updated
 	manage_money()
 
 # handles collision results between player body and money items

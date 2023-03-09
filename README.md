@@ -195,4 +195,7 @@ Subsequent commits should reflect finer-grained changes to the code.
  * Picking up the money
  * Dropping money if the collision wasn't with money as appropriate
  
- 
+ ### 49. Announcements
+ * Fading announcement text in and out
+ * Announcing how much money has been delivered
+ * Announcing who delivered the money
