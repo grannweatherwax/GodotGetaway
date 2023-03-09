@@ -12,6 +12,7 @@ var steer_target = 0.0	# where does player want wheels to go
 var steer_angle = 0.0	# where are the wheels now
 
 var money = 0
+var money_drop = 50
 var money_per_beacon = 1000
 
 sync var players = {}
@@ -129,6 +130,7 @@ sync func manage_clients(id, steering_value, throttle, brakes, speed):
 	players[id].brakes = brakes
 	players[id].position = transform
 	players[id].speed = linear_velocity.length()
+	# unreliable remote call to update with ongoing changes to player values
 	rset_unreliable("players", players)
 
 # take player's grid reference location and display to GUI
@@ -140,28 +142,61 @@ func display_location():
 	# send location coordinates as whole numbers in string to GUI
 	$GUI/ColorRect/VBoxContainer/Location.text = str(x) + ", " + str(z)
 
+# handles triggering money management as beacon is emptied
 func beacon_emptied():
+	# updates player's money holdings with beacon's amount
 	money += money_per_beacon
+	# triggers updating player dictionary and GUI updating for host and clients
 	manage_money()
 
+# handles host vs client updating player dictionary with money holdings
 func manage_money():
 	if Network.local_player_id == 1:
 		update_money(name, money)
 	else:
 		rpc_id(1, "update_money", name, money)
 
+# handles host vs client updates to money holdings for display
 remote func update_money(id, cash):
+	# get reference to player's currently held money
 	players[id].money = cash
+	# if player is host, run display money locally
 	if name == "1":
 		display_money(cash)
+	# if player is client, rpc display money on host machine
 	else: rpc_id(int(id), "display_money", cash)
 
+# handles updating the display of money amounts held by players in the GUI
 remote func display_money(cash):
+	# get reference to player's currently held mondy
 	money = players[name].money
+	# runs animation in money display
 	$GUI/ColorRect/VBoxContainer/MoneyLabel/AnimationPlayer.play("MoneyPulse")
+	# updates displayed money amount in player GUI
 	$GUI/ColorRect/VBoxContainer/MoneyLabel.text = "$" + str(cash)
 
 func money_delivered():
 	print("delivering " + str(money))
 	money = 0
 	manage_money()
+
+# handles collision results between player body and money items
+func _on_Player_body_entered(body):
+	if body.has_node("Money"):
+		body.queue_free()
+		money += money_drop
+	elif money > 0 and not is_in_group("cops"):
+		spawn_money()
+		money -= money_drop
+	manage_money()
+
+# handles spawning money drops in the world during gameplay
+func spawn_money():
+	# preload the moneybag scene instance
+	var moneybag = preload("res://Props/MoneyBag/MoneyBag.tscn").instance()
+	# spawn the moneybag at the player's position 4m above their y
+	moneybag.translation = Vector3(translation.x, 4, translation.z)
+	# move up the scene hierarchy into the the main node of world and add moneybag instance as child
+	# moneydrops are not going to be visible to other players, but can be picked up
+	# so added functionality could be to allow the moneybag rigidbody to sleep and on sleep add it to networked scene?
+	get_parent().get_parent().add_child(moneybag)

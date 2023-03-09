@@ -189,4 +189,10 @@ Subsequent commits should reflect finer-grained changes to the code.
  * Making sure that goals and beacons don't overlap
  * Delivering money
  
+ ### 48. Dropping Money
+ * Spawning an object on contact
+ * Checking if that object is "money" 
+ * Picking up the money
+ * Dropping money if the collision wasn't with money as appropriate
+ 
  
