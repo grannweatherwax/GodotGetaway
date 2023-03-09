@@ -49,6 +49,8 @@ func join_team():
 	else: 
 		# remove cop mesh from player scene
 		$CopMesh.queue_free()
+		# remove the crime in progress indication arrow from the robber's player scene
+		$Arrow.queue_free()
 		
 
 # every frame, calculate these

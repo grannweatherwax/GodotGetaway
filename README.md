@@ -199,3 +199,9 @@ Subsequent commits should reflect finer-grained changes to the code.
  * Fading announcement text in and out
  * Announcing how much money has been delivered
  * Announcing who delivered the money
+ 
+ ### 50. Tracking Crimes
+ * Annoucing the location of a crime in progress
+ * Summoning a 3D arrow to point at the crime in progress
+ 
+ 

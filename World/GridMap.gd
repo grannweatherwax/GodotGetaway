@@ -167,7 +167,7 @@ func make_maze():
 
 func fill_gaps(current_cell, dir):
 	var tile_type
-	for i in range(1, spacing): # range starts at 1 so that if the spacing is set to 1 the loop won't run
+	for _i in range(1, spacing): # range starts at 1 so that if the spacing is set to 1 the loop won't run
 		if dir.x > 0: # if we're heading east
 			tile_type = 5 # use the e-w road tile, 5
 			current_cell.x += 1 # change the value of the current cell 
@@ -185,7 +185,7 @@ func fill_gaps(current_cell, dir):
 		rpc("place_cell", current_cell.x, current_cell.z, tile_type, 0) # set cell in networked generation
 
 func erase_walls():
-	for i in range(width * height * erase_fraction): # get the total no of cells and reduce to the erase_fraction
+	for _i in range(width * height * erase_fraction): # get the total no of cells and reduce to the erase_fraction
 		var x = int(rand_range(1, (width - 1)/spacing)) * spacing # need to start range at 1 so that there aren't holes in map
 		var z = int(rand_range(1, (height - 1)/spacing)) * spacing
 		var cell = Vector3(x,0,z) # variable to store cell as func progresses

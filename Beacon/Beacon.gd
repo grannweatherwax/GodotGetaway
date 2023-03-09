@@ -30,6 +30,8 @@ func _on_Beacon_body_entered(body):
 	$Timer.start()
 	# show the location of the beacon to all players from now on
 	show()
+	# call the Announcements group and run its function announce_crime and pass in the translation parameter
+	get_tree().call_group("Announcements", "announce_crime", translation)
 
 # handles behavior when player exits beacon body
 func _on_Beacon_body_exited(body):

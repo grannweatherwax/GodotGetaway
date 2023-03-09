@@ -43,7 +43,7 @@ func random_tile(tile_count):
 
 func place_beacon():
 	var tile_list = random_tile(number_of_beacons + 1)
-	for i in range(number_of_beacons):
+	for _i in range(number_of_beacons):
 		var tile = tile_list[0]
 		rpc("spawn_beacons", tile)
 		tile_list.pop_front()
@@ -62,7 +62,7 @@ sync func spawn_goal(tile):
 # handles putting the cars parked as props in the scene
 func place_cars():
 	var tile_list = random_tile(number_of_parked_cars + number_of_ramps)
-	for i in range(number_of_parked_cars):
+	for _i in range(number_of_parked_cars):
 		var tile = tile_list[0]
 		var tile_type = get_node("..").get_cell_item(tile.x, 0, tile.z)
 		# send the tile type we have a look up possible rotations for the props
@@ -90,7 +90,7 @@ sync func spawn_cars(tile, car_rotation):
 
 # handles putting the dumpster ramps as props in the scene
 func place_ramps(tile_list):
-	for i in range(number_of_ramps):
+	for _i in range(number_of_ramps):
 		var tile = tile_list[0]
 		var tile_type = get_node("..").get_cell_item(tile.x, 0, tile.z)
 		# send the tile type we have a look up possible rotations for the props
@@ -117,7 +117,7 @@ sync func spawn_ramps(tile, ramp_rotation):
 # handles putting the billboards in the scene
 func place_billboards():
 	var tile_list = random_tile(number_of_billboards)
-	for i in range(number_of_billboards):
+	for _i in range(number_of_billboards):
 		var tile = tile_list[0]
 		var tile_type = get_node("..").get_cell_item(tile.x, 0, tile.z)
 		# send the tile type we have a look up possible rotations for the props
@@ -144,7 +144,7 @@ sync func spawn_billboards(tile, billboard_rotation):
 # handles putting the traffic cones in the scene
 func place_traffic_cones():
 	var tile_list = random_tile(number_of_traffic_cones)
-	for i in range(number_of_traffic_cones):
+	for _i in range(number_of_traffic_cones):
 		var tile = tile_list[0]
 		var tile_type = get_node("..").get_cell_item(tile.x, 0, tile.z)
 		# send the tile type we have a look up possible rotations for the props
@@ -171,7 +171,7 @@ sync func spawn_traffic_cones(tile, cone_rotation):
 # handles putting the hydrants in the scene
 func place_hydrants():
 	var tile_list = random_tile(number_of_hydrants)
-	for i in range(number_of_hydrants):
+	for _i in range(number_of_hydrants):
 		var tile = tile_list[0]
 		var tile_type = get_node("..").get_cell_item(tile.x, 0, tile.z)
 		# send the tile type we have a look up possible rotations for the props
@@ -198,7 +198,7 @@ sync func spawn_hydrants(tile, hydrant_rotation):
 # handles putting the streetlamps in the scene
 func place_streetlights():
 	var tile_list = random_tile(number_of_streetlights)
-	for i in range(number_of_streetlights):
+	for _i in range(number_of_streetlights):
 		var tile = tile_list[0]
 		var tile_type = get_node("..").get_cell_item(tile.x, 0, tile.z)
 		# send the tile type we have a look up possible rotations for the props
@@ -225,7 +225,7 @@ sync func spawn_streetlights(tile, streetlight_rotation):
 # handles putting the scaffolding in the scene
 func place_scaffolding():
 	var tile_list = random_tile(number_of_scaffolding)
-	for i in range(number_of_scaffolding):
+	for _i in range(number_of_scaffolding):
 		var tile = tile_list[0]
 		var tile_type = get_node("..").get_cell_item(tile.x, 0, tile.z)
 		# send the tile type we have a look up possible rotations for the props
