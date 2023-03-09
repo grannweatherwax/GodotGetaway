@@ -15,6 +15,8 @@ var money = 0
 var money_drop = 50
 var money_per_beacon = 1000
 
+var siren = false
+
 sync var players = {}
 var player_data = {
 		"steer": 0, 
@@ -51,6 +53,7 @@ func join_team():
 		$CopMesh.queue_free()
 		# remove the crime in progress indication arrow from the robber's player scene
 		$Arrow.queue_free()
+		$Siren.queue_free()
 		
 
 # every frame, calculate these
@@ -205,3 +208,20 @@ func spawn_money():
 	# moneydrops are not going to be visible to other players, but can be picked up
 	# so added functionality could be to allow the moneybag rigidbody to sleep and on sleep add it to networked scene?
 	get_parent().get_parent().add_child(moneybag)
+
+func _input(event):
+	if event.is_action_pressed("car_sound") and is_local_Player() and is_in_group("cops"):
+		# change current value of siren to its opposite
+		siren = !siren
+		toggle_siren()
+
+func toggle_siren():
+	if siren:
+		$Siren/AudioStreamPlayer3D.play()
+		$Siren/SirenMesh/SpotLight.show()
+		$Siren/SirenMesh/SpotLight2.show()
+	else:
+		$Siren/AudioStreamPlayer3D.stop()
+		$Siren/SirenMesh/SpotLight.hide()
+		$Siren/SirenMesh/SpotLight2.hide()
+		
