@@ -228,3 +228,7 @@ Subsequent commits should reflect finer-grained changes to the code.
  ### 56. Spawning cops
  * Ending the game if a robber is arrested
  * Having cops spawn away from robbers
+ 
+ ### 57. A Better Lobby, part 1
+ * Change player color
+ * Make lobby appearance nicer
