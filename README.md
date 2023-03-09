@@ -225,4 +225,6 @@ Subsequent commits should reflect finer-grained changes to the code.
  * Checking the Win Conditions
  * Announcing that the game is over
  
- 
+ ### 56. Spawning cops
+ * Ending the game if a robber is arrested
+ * Having cops spawn away from robbers

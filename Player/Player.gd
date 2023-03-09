@@ -280,3 +280,6 @@ func increment_arrest_value():
 	arrest_value += 1
 	# update player billboard to show new value
 	$PlayerBillboard/Viewport/TextureProgress.value = arrest_value
+	# create cop victory when max arrest value is reached
+	if arrest_value == max_arrest_value:
+		get_tree().call_group("Announcements", "victory", false)

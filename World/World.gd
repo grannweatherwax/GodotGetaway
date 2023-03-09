@@ -5,6 +5,8 @@ var money_recovered = 0
 export var criminal_victory_score = 3000
 export var cop_victory_score = 3000
 
+var cop_spawn
+
 func _enter_tree():
 	get_tree().paused = true
 
@@ -21,6 +23,9 @@ func spawn_local_player():
 	new_player.translation = Vector3(12, 3, 12)
 	# add this to the scene
 	$Players.add_child(new_player)
+	if Network.is_cop:
+		yield(get_tree(), "idle_frame")
+		new_player.translation = cop_spawn
 
 # spawn the instance of yourself on the networked machines
 remote func spawn_remote_player(id):
@@ -29,6 +34,9 @@ remote func spawn_remote_player(id):
 	new_player.translation = Vector3(12, 3, 12)
 	new_player.name = str(id)
 	$Players.add_child(new_player)
+	if new_player.is_in_group("cops"):
+		yield(get_tree(), "idle_frame")
+		new_player.translation = cop_spawn
 
 func unpause():
 	get_tree().paused = false
@@ -54,3 +62,7 @@ func check_win_conditions():
 		get_tree().call_group("Announcements", "victory", true)
 	elif money_recovered >= cop_victory_score:
 		get_tree().call_group("Announcements", "victory", false)
+
+# handles spawning the cop into the world
+func _on_ObjectSpawner_cop_spawn(location):
+	cop_spawn = location

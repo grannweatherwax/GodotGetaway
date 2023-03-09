@@ -17,6 +17,8 @@ var number_of_ramps = 25
 var number_of_scaffolding = 30
 var number_of_cafes = 20
 
+signal cop_spawn
+
 # handle generation and placement of props in game map
 func generate_props(tile_list, size, plazas):
 	tiles = tile_list
@@ -58,6 +60,7 @@ sync func spawn_goal(tile):
 	var goal = preload("res://Beacon/Goal.tscn").instance()
 	goal.translation = Vector3((tile.x * tile_size) + tile_offset, tile.y, (tile.z * tile_size) + tile_offset)
 	add_child(goal, true)
+	emit_signal("cop_spawn", goal.translation)
 
 # handles putting the cars parked as props in the scene
 func place_cars():
