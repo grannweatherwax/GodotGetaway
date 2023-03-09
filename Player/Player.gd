@@ -24,7 +24,8 @@ var player_data = {
 		"brakes": 0, 
 		"position": null, 
 		"speed": 0, 
-		"money": 0
+		"money": 0, 
+		"siren": false
 		}
 
 func _ready():
@@ -67,6 +68,9 @@ func _physics_process(delta):
 	steering = players[name].steer
 	engine_force = players[name].engine
 	brake = players[name].brakes
+	
+	if is_in_group("cops"):
+		check_siren()
 
 # to drive the car, calculate these behaviors
 func drive(delta):
@@ -213,11 +217,23 @@ func _input(event):
 	if event.is_action_pressed("car_sound") and is_local_Player() and is_in_group("cops"):
 		# change current value of siren to its opposite
 		siren = !siren
-		toggle_siren()
+		# if you're not the host then run the function
+		if not Network.local_player_id == 1:
+			# send the rpc to host machine along with siren-using player's name and siren status
+			rpc_id(1, "toggle_siren", name, siren)
+		else:
+			# if you're the the host run the function
+			toggle_siren(name, siren)
 
-func toggle_siren():
-	if siren:
-		$Siren/AudioStreamPlayer3D.play()
+# handle remotely toggling siren status for each player's dictionary entry
+remote func toggle_siren(id, siren_state):
+	players[id]["siren"] = siren_state
+	
+
+func check_siren():
+	if players[name]["siren"]:
+		if not $Siren/AudioStreamPlayer3D.playing:
+			$Siren/AudioStreamPlayer3D.play()
 		$Siren/SirenMesh/SpotLight.show()
 		$Siren/SirenMesh/SpotLight2.show()
 	else:

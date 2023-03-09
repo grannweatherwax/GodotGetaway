@@ -208,4 +208,7 @@ Subsequent commits should reflect finer-grained changes to the code.
  * Making a physical, old fashioned police siren
  * Toggling the siren off and on
  
+ ### 52. Networking Sirens
+ * Making sirens work on all machines
+ 
  
