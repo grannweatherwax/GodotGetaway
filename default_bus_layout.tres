@@ -1,4 +1,8 @@
-[gd_resource type="AudioBusLayout" format=2]
+[gd_resource type="AudioBusLayout" load_steps=2 format=2]
+
+[sub_resource type="AudioEffectPhaser" id=1]
+resource_name = "Phaser"
+range_max_hz = 2000.0
 
 [resource]
 bus/1/name = "SoundEffects"
@@ -31,6 +35,8 @@ bus/5/mute = true
 bus/5/bypass_fx = false
 bus/5/volume_db = 0.0
 bus/5/send = "Music"
+bus/5/effect/0/effect = SubResource( 1 )
+bus/5/effect/0/enabled = true
 bus/6/name = "Music4"
 bus/6/solo = false
 bus/6/mute = true

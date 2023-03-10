@@ -274,4 +274,8 @@ Subsequent commits should reflect finer-grained changes to the code.
  * Creating a music player
  * Looking at the Audiobus
  
+ ### 66. Phaser
+ * Using EQ
+ * Phaser settings
+ 
  
