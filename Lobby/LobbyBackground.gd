@@ -28,7 +28,6 @@ func apply_defaults():
 	paint.metallic_specular = 0.25
 	paint.roughness = 0.25
 	paint.albedo_color = default_color
-	pass
 
 func new_color(color):
 	paint.albedo_color = color

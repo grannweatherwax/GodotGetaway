@@ -243,4 +243,10 @@ Subsequent commits should reflect finer-grained changes to the code.
  * Setting up a ColorPickerButton node
  * Changing material values in code
  
+ ### 60. Applying Paint
+ * Creating a new SpatialMaterial in code
+ * Applying the new material to the car
+ * Updating the color to match the player's choice
+ * Sending that color over the network
+ 
  
