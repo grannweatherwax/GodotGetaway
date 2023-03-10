@@ -161,6 +161,7 @@ func update_server(id, steering_value, throttle, brakes, speed):
 	else:
 		manage_clients(id, steering_value, throttle, brakes, speed)
 	get_tree().call_group("Interface", "update_speed", speed)
+	$Exhaust.update_particles(speed)
 
 # handle keeping client players location and control status up to date
 sync func manage_clients(id, steering_value, throttle, brakes, speed):

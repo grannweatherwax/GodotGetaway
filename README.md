@@ -311,4 +311,8 @@ Subsequent commits should reflect finer-grained changes to the code.
  * Have host tell all players to load correct environment
  * Having lighting match environment
  
+ ### 74. Exhaust
+ * Create a particle for the exhaust
+ * Have the exhaust react to the player speed
+ 
  
