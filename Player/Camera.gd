@@ -21,6 +21,7 @@ func _ready():
 	make_neighborhoods()
 	# allows camera to move independently from its parent node
 	set_as_toplevel(true)
+	environment = load(Network.environment)
 	# sets the local variable to the node it needs to follow
 	follow_this = get_node(follow_this_path)
 	# the last thing you looked at is the global position of the camera target

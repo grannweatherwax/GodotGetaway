@@ -48,6 +48,10 @@ func unpause():
 	spawn_local_player()
 	# tell every other machine on the network to spawn me as well
 	rpc("spawn_remote_player", Network.local_player_id)
+	if Network.environment == "res://Environments/night.tres":
+		$Sun.queue_free()
+	else: 
+		get_tree().call_group("Lights", "queue_free")
 
 # handles updating money stashed and updating money recovered
 remote func update_gamestate(stashed, recovered):

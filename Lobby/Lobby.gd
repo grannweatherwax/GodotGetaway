@@ -6,6 +6,7 @@ onready var sel_IP = $VBoxContainer/CenterContainer/GridContainer/IPTextbox
 
 var is_cop = false
 var city_size
+var environment = "res://Environments/night.tres"
 
 func _ready():
 	NameTextBox.text = Saved.save_data["Player_name"]
@@ -25,6 +26,7 @@ func _on_HostButton_pressed():
 	Network.create_server()
 	# set variable city_size in Network class to local value of city_size
 	Network.city_size = city_size
+	Network.environment = environment
 	generate_city_seed()
 	# call the show() method for nodes in the HostOnly group
 	get_tree().call_group("HostOnly", "show")
@@ -120,6 +122,14 @@ func _on_CitySizePicker_item_selected(index):
 func _on_AudioButton_pressed():
 	$AudioMenu.popup_centered()
 	pass # Replace with function body.
+
+func _on_TimeCheck_item_selected(index):
+	match index:
+		0:
+			environment = "res://Environments/night.tres"
+		1:
+			environment = "res://Environments/day.tres"
+
 
 
 

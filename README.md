@@ -305,4 +305,10 @@ Subsequent commits should reflect finer-grained changes to the code.
  
  ### 72. Day Time
  
+ ### 73. Setting the Environment
+ * Update Lobby GUI
+ * Store the environment
+ * Have host tell all players to load correct environment
+ * Having lighting match environment
+ 
  

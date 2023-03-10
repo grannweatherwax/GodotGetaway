@@ -21,6 +21,7 @@ var city_size = Vector2()
 var prop_multiplier
 
 var world_seed
+var environment
 
 func _ready():
 	get_tree().connect("network_peer_disconnected", self, "_on_player_disconnect")
@@ -92,7 +93,8 @@ sync func update_waiting_room():
 	get_tree().call_group("WaitingRoom", "refresh_players", players)
 
 func start_game():
-	rpc("load_world")
+	rpc("load_world", environment)
 
-sync func load_world():
+sync func load_world(selected_environment):
+	environment = selected_environment
 	get_tree().change_scene("res://World/World.tscn")
