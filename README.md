@@ -278,4 +278,9 @@ Subsequent commits should reflect finer-grained changes to the code.
  * Using EQ
  * Phaser settings
  
+ ### 67. Adding Neighborhood Musis
+ * Defining neighborhoods
+ * Controlling the audiobus in script
+ * Dynamic music in game
+ 
  
