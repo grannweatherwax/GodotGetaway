@@ -232,3 +232,9 @@ Subsequent commits should reflect finer-grained changes to the code.
  ### 57. A Better Lobby, part 1
  * Change player color
  * Make lobby appearance nicer
+ 
+ ### 58. A Better Lobby, part 2
+ Preparing for player customization
+ * Making the Pivot turn
+ * Improving team selection
+ * Tweening

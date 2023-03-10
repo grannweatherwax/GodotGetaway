@@ -58,3 +58,25 @@ func _on_ReadyButton_pressed():
 # what team is the player joining
 func _on_TeamCheck_toggled(button_pressed):
 	is_cop = button_pressed
+
+
+func _on_TeamCheck_item_selected(index):
+	# if the is_cop variable is the same as the index boolean, do this
+	if not int(is_cop) == index:
+		var button = $VBoxContainer/CenterContainer/GridContainer/TeamCheck
+		button.set_item_disabled(0, true)
+		button.set_item_disabled(1, true)
+		is_cop = index
+		$LobbyBackground.pivot()
+
+func _on_Tween_tween_completed(object, key):
+	var button = $VBoxContainer/CenterContainer/GridContainer/TeamCheck
+	button.set_item_disabled(0, false)
+	button.set_item_disabled(1, false)
+
+
+
+
+
+
+

@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Lobby/WaitingRoom.tscn" type="PackedScene" id=1]
 [ext_resource path="res://GUI/default.theme.tres" type="Theme" id=2]
 [ext_resource path="res://Lobby/Lobby.gd" type="Script" id=3]
 [ext_resource path="res://Lobby/LobbyBackground.tscn" type="PackedScene" id=4]
+[ext_resource path="res://GUI/criminal.svg" type="Texture" id=5]
+[ext_resource path="res://GUI/cop.svg" type="Texture" id=6]
 
 [node name="Lobby" type="CanvasLayer"]
 script = ExtResource( 3 )
@@ -25,27 +27,27 @@ align = 1
 [node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
 margin_top = 38.0
 margin_right = 1024.0
-margin_bottom = 284.0
+margin_bottom = 294.0
 
 [node name="GridContainer" type="GridContainer" parent="VBoxContainer/CenterContainer"]
-margin_left = 281.0
-margin_right = 742.0
-margin_bottom = 246.0
+margin_left = 285.0
+margin_right = 738.0
+margin_bottom = 256.0
 custom_constants/vseparation = 8
 custom_constants/hseparation = 16
 columns = 2
 
 [node name="NameLabel" type="Label" parent="VBoxContainer/CenterContainer/GridContainer"]
-margin_top = 5.0
-margin_right = 125.0
-margin_bottom = 39.0
+margin_top = 2.0
+margin_right = 117.0
+margin_bottom = 36.0
 text = "Name"
 align = 2
 
 [node name="NameTextbox" type="LineEdit" parent="VBoxContainer/CenterContainer/GridContainer"]
-margin_left = 141.0
-margin_right = 461.0
-margin_bottom = 44.0
+margin_left = 133.0
+margin_right = 453.0
+margin_bottom = 38.0
 rect_min_size = Vector2( 320, 0 )
 text = "Player"
 align = 1
@@ -53,17 +55,17 @@ caret_blink = true
 caret_blink_speed = 0.5
 
 [node name="IPLabel" type="Label" parent="VBoxContainer/CenterContainer/GridContainer"]
-margin_top = 57.0
-margin_right = 125.0
-margin_bottom = 91.0
+margin_top = 48.0
+margin_right = 117.0
+margin_bottom = 82.0
 text = "IP"
 align = 2
 
 [node name="IPTextbox" type="LineEdit" parent="VBoxContainer/CenterContainer/GridContainer"]
-margin_left = 141.0
-margin_top = 52.0
-margin_right = 461.0
-margin_bottom = 96.0
+margin_left = 133.0
+margin_top = 46.0
+margin_right = 453.0
+margin_bottom = 84.0
 rect_min_size = Vector2( 320, 0 )
 text = "127.0.0.1"
 align = 1
@@ -71,50 +73,55 @@ caret_blink = true
 caret_blink_speed = 0.5
 
 [node name="PortLabel" type="Label" parent="VBoxContainer/CenterContainer/GridContainer"]
-margin_top = 109.0
-margin_right = 125.0
-margin_bottom = 143.0
+margin_top = 94.0
+margin_right = 117.0
+margin_bottom = 128.0
 text = "Port"
 align = 2
 
 [node name="PortTextbox" type="LineEdit" parent="VBoxContainer/CenterContainer/GridContainer"]
-margin_left = 141.0
-margin_top = 104.0
-margin_right = 461.0
-margin_bottom = 148.0
+margin_left = 133.0
+margin_top = 92.0
+margin_right = 453.0
+margin_bottom = 130.0
 rect_min_size = Vector2( 320, 0 )
 text = "32032"
 align = 1
 caret_blink = true
 caret_blink_speed = 0.5
 
-[node name="HostButton" type="Button" parent="VBoxContainer/CenterContainer/GridContainer"]
-margin_top = 156.0
-margin_right = 125.0
-margin_bottom = 196.0
-text = "Host Game"
-
-[node name="JoinButton" type="Button" parent="VBoxContainer/CenterContainer/GridContainer"]
-margin_left = 141.0
-margin_top = 156.0
-margin_right = 461.0
-margin_bottom = 196.0
-text = "Join Game"
-
 [node name="TeamLabel" type="Label" parent="VBoxContainer/CenterContainer/GridContainer"]
-margin_top = 208.0
-margin_right = 125.0
-margin_bottom = 242.0
+margin_top = 157.0
+margin_right = 117.0
+margin_bottom = 191.0
 text = "Team"
 align = 2
 
-[node name="TeamCheck" type="CheckButton" parent="VBoxContainer/CenterContainer/GridContainer"]
-margin_left = 141.0
-margin_top = 204.0
-margin_right = 461.0
-margin_bottom = 246.0
-text = "Cop Mode"
-align = 2
+[node name="TeamCheck" type="ItemList" parent="VBoxContainer/CenterContainer/GridContainer"]
+margin_left = 133.0
+margin_top = 138.0
+margin_right = 453.0
+margin_bottom = 210.0
+items = [ "", ExtResource( 5 ), false, "", ExtResource( 6 ), false ]
+auto_height = true
+max_columns = 2
+same_column_width = true
+fixed_column_width = 120
+icon_mode = 0
+fixed_icon_size = Vector2( 64, 64 )
+
+[node name="HostButton" type="Button" parent="VBoxContainer/CenterContainer/GridContainer"]
+margin_top = 218.0
+margin_right = 117.0
+margin_bottom = 256.0
+text = "Host Game"
+
+[node name="JoinButton" type="Button" parent="VBoxContainer/CenterContainer/GridContainer"]
+margin_left = 133.0
+margin_top = 218.0
+margin_right = 453.0
+margin_bottom = 256.0
+text = "Join Game"
 
 [node name="WaitingRoom" parent="." groups=["WaitingRoom"] instance=ExtResource( 1 )]
 theme = ExtResource( 2 )
@@ -127,13 +134,16 @@ margin_top = 38.0
 margin_bottom = 123.0
 
 [node name="ItemList" parent="WaitingRoom/VBoxContainer/CenterContainer" index="0"]
-margin_bottom = 85.0
+margin_top = 42.0
+margin_bottom = 42.0
 items = [ "Player 1", null, false, "Player 2", null, false ]
 
+[connection signal="tween_completed" from="LobbyBackground/Tween" to="." method="_on_Tween_tween_completed"]
 [connection signal="text_changed" from="VBoxContainer/CenterContainer/GridContainer/NameTextbox" to="." method="_on_NameTextbox_text_changed"]
+[connection signal="item_selected" from="VBoxContainer/CenterContainer/GridContainer/TeamCheck" to="." method="_on_TeamCheck_item_selected"]
 [connection signal="pressed" from="VBoxContainer/CenterContainer/GridContainer/HostButton" to="." method="_on_HostButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/CenterContainer/GridContainer/JoinButton" to="." method="_on_JoinButton_pressed"]
-[connection signal="toggled" from="VBoxContainer/CenterContainer/GridContainer/TeamCheck" to="." method="_on_TeamCheck_toggled"]
 [connection signal="pressed" from="WaitingRoom/VBoxContainer/ReadyButton" to="." method="_on_ReadyButton_pressed"]
 
+[editable path="LobbyBackground"]
 [editable path="WaitingRoom"]
