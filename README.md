@@ -259,4 +259,8 @@ Subsequent commits should reflect finer-grained changes to the code.
  * Tweaking the theme for OptionButtons
  * Using the selected option to resize the city
  
+ ### 63. The Repropulation
+ * Using a multiplier in prop placement
+ * Adjusting the number of props for city size
+ 
  

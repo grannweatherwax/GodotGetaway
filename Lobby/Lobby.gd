@@ -91,15 +91,20 @@ func _on_ColorPickerButton_color_changed(color):
 
 # handle city size selection from lobby
 func _on_CitySizePicker_item_selected(index):
+	# for each id, update values for city_size and prop_multiplier
 	match index:
 		0:
 			city_size = Vector2(15, 15)
+			Network.prop_multiplier = 0.5
 		1: 
 			city_size = Vector2(20, 20)
+			Network.prop_multiplier = 1
 		2: 
 			city_size = Vector2(40, 40)
+			Network.prop_multiplier = 2
 		3:
 			city_size = Vector2(100, 100)
+			Network.prop_multiplier = 5
 
 
 
