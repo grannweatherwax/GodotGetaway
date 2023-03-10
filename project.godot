@@ -19,6 +19,7 @@ config/icon="res://icon.png"
 Network="*res://Networking/Network.gd"
 Saved="*res://SaveGame/Saved.gd"
 Music="*res://Music/Music.tscn"
+VolumeControl="*res://Music/VolumeControl.gd"
 
 [input]
 

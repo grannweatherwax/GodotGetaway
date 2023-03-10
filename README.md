@@ -283,4 +283,8 @@ Subsequent commits should reflect finer-grained changes to the code.
  * Controlling the audiobus in script
  * Dynamic music in game
  
+ ### 68. Volume Control 1
+ * Creating the volume control singleton
+ * Making volume consistent between playthroughs
+ 
  

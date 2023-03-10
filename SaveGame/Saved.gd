@@ -13,7 +13,10 @@ func get_data():
 	if not file.file_exists(SAVEGAME):
 		# add player name and local paint color to json save data
 		save_data = {"Player_name": "Unnamed", 
-				"local_paint_color": "FF6E2626"}
+				"local_paint_color": "FF6E2626", 
+				"master_volume": 0.75, 
+				"music_volume": 0.75, 
+				"sfx_volume": 0.75}
 		save_game()
 	# Assign the data from SAVEGAME to the new file and read it
 	file.open(SAVEGAME, File.READ)
