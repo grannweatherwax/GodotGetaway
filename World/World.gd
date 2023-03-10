@@ -13,6 +13,10 @@ func _enter_tree():
 func _ready():
 	pass
 
+func _input(event):
+	if Input.is_action_just_pressed("menu"):
+		$AudioMenu.visible = !$AudioMenu.visible
+
 # spawn an instance of yourself on your own maching
 func spawn_local_player():
 	# create a new instance of the player scene (your car)

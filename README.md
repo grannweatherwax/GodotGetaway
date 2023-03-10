@@ -287,4 +287,9 @@ Subsequent commits should reflect finer-grained changes to the code.
  * Creating the volume control singleton
  * Making volume consistent between playthroughs
  
+ ### 69. Volume Control 2
+ * Wiring up the GUI
+ * Changing the volume settings in the lobby
+ * Changing the volume settings in the game
+ 
  
