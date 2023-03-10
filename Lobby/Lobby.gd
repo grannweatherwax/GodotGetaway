@@ -5,11 +5,13 @@ onready var port = $VBoxContainer/CenterContainer/GridContainer/PortTextbox
 onready var sel_IP = $VBoxContainer/CenterContainer/GridContainer/IPTextbox
 
 var is_cop = false
+var city_size
 
 func _ready():
 	NameTextBox.text = Saved.save_data["Player_name"]
 	sel_IP.text = Network.DEFAULT_IP
 	port.text = str(Network.DEFAULT_PORT)
+	_on_CitySizePicker_item_selected(1)
 	# sets previously selected/default from json as pre-selected color
 	$VBoxContainer/CenterContainer/GridContainer/ColorPickerButton.color = Saved.save_data["local_paint_color"]
 
@@ -21,6 +23,8 @@ func _on_HostButton_pressed():
 	Network.is_cop = is_cop
 	# creates the server
 	Network.create_server()
+	# set variable city_size in Network class to local value of city_size
+	Network.city_size = city_size
 	get_tree().call_group("HostOnly", "show")
 	# displays waiting room where joining players can be seen
 	create_waiting_room()
@@ -84,6 +88,19 @@ func _on_ColorPickerButton_color_changed(color):
 	Saved.save_data["local_paint_color"] = color.to_html()
 	# run save_game method of Saved class
 	Saved.save_game()
+
+# handle city size selection from lobby
+func _on_CitySizePicker_item_selected(index):
+	match index:
+		0:
+			city_size = Vector2(15, 15)
+		1: 
+			city_size = Vector2(20, 20)
+		2: 
+			city_size = Vector2(40, 40)
+		3:
+			city_size = Vector2(100, 100)
+
 
 
 

@@ -254,4 +254,9 @@ Subsequent commits should reflect finer-grained changes to the code.
  * Updating our existing scripts
  * Making the saved color choices the default
  
+ ### 62. Variable City Size
+ * Using OptionButton nodes
+ * Tweaking the theme for OptionButtons
+ * Using the selected option to resize the city
+ 
  

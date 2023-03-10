@@ -26,12 +26,12 @@ align = 1
 [node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
 margin_top = 38.0
 margin_right = 1024.0
-margin_bottom = 340.0
+margin_bottom = 386.0
 
 [node name="GridContainer" type="GridContainer" parent="VBoxContainer/CenterContainer"]
 margin_left = 285.0
 margin_right = 738.0
-margin_bottom = 302.0
+margin_bottom = 348.0
 custom_constants/vseparation = 8
 custom_constants/hseparation = 16
 columns = 2
@@ -123,17 +123,34 @@ margin_right = 453.0
 margin_bottom = 256.0
 edit_alpha = false
 
-[node name="HostButton" type="Button" parent="VBoxContainer/CenterContainer/GridContainer"]
-margin_top = 264.0
+[node name="CitySizeLabel" type="Label" parent="VBoxContainer/CenterContainer/GridContainer"]
+margin_top = 266.0
 margin_right = 117.0
-margin_bottom = 302.0
-text = "Host Game"
+margin_bottom = 300.0
+text = "City Size"
+align = 2
 
-[node name="JoinButton" type="Button" parent="VBoxContainer/CenterContainer/GridContainer"]
+[node name="CitySizePicker" type="OptionButton" parent="VBoxContainer/CenterContainer/GridContainer"]
 margin_left = 133.0
 margin_top = 264.0
 margin_right = 453.0
 margin_bottom = 302.0
+text = "Medium"
+align = 1
+items = [ "Small", null, false, 0, null, "Medium", null, false, 1, null, "Large", null, false, 2, null, "Mega", null, false, 3, null ]
+selected = 1
+
+[node name="HostButton" type="Button" parent="VBoxContainer/CenterContainer/GridContainer"]
+margin_top = 310.0
+margin_right = 117.0
+margin_bottom = 348.0
+text = "Host Game"
+
+[node name="JoinButton" type="Button" parent="VBoxContainer/CenterContainer/GridContainer"]
+margin_left = 133.0
+margin_top = 310.0
+margin_right = 453.0
+margin_bottom = 348.0
 text = "Join Game"
 
 [node name="WaitingRoom" parent="." groups=["WaitingRoom"] instance=ExtResource( 1 )]
@@ -155,6 +172,7 @@ items = [ "Player 1", null, false, "Player 2", null, false ]
 [connection signal="text_changed" from="VBoxContainer/CenterContainer/GridContainer/NameTextbox" to="." method="_on_NameTextbox_text_changed"]
 [connection signal="item_selected" from="VBoxContainer/CenterContainer/GridContainer/TeamCheck" to="." method="_on_TeamCheck_item_selected"]
 [connection signal="color_changed" from="VBoxContainer/CenterContainer/GridContainer/ColorPickerButton" to="." method="_on_ColorPickerButton_color_changed"]
+[connection signal="item_selected" from="VBoxContainer/CenterContainer/GridContainer/CitySizePicker" to="." method="_on_CitySizePicker_item_selected"]
 [connection signal="pressed" from="VBoxContainer/CenterContainer/GridContainer/HostButton" to="." method="_on_HostButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/CenterContainer/GridContainer/JoinButton" to="." method="_on_JoinButton_pressed"]
 [connection signal="pressed" from="WaitingRoom/VBoxContainer/ReadyButton" to="." method="_on_ReadyButton_pressed"]

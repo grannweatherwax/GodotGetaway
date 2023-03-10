@@ -5,8 +5,8 @@ const E = 2
 const S = 4
 const W = 8
 
-var width = 20
-var height = 20 # probably better to call this depth, it's the z axis
+var width
+var height # probably better to call this depth, it's the z axis
 var spacing = 2 # how many tiles do we need to move to change directions
 
 var erase_fraction = 0.25
@@ -24,10 +24,16 @@ func _ready():
 	clear() # clear out all the stuff placed during level design
 	if Network.local_player_id == 1:
 		randomize()
+		get_map_settings()
 		make_map_border()
 		make_map()
 		record_tile_positions()
 		rpc("send_ready")
+
+# assemble variables in prep for map generation
+func get_map_settings():
+	width = Network.city_size.x
+	height = Network.city_size.y
 
 # set the walls of the game space
 func make_map_border():
