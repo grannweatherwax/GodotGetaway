@@ -292,4 +292,10 @@ Subsequent commits should reflect finer-grained changes to the code.
  * Changing the volume settings in the lobby
  * Changing the volume settings in the game
  
- 
+ ### 70. Chasecam
+ * Fix car handling
+ * Make a better camera
+	* Chase the car without being glued to it
+	* Change field of view with velocity
+	
+	
