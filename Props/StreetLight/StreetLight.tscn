@@ -34,7 +34,7 @@ visible = false
 [node name="shape0" type="CollisionShape" parent="StreetLamp/static_collision"]
 shape = SubResource( 37 )
 
-[node name="OmniLight" type="OmniLight" parent="StreetLamp"]
+[node name="OmniLight" type="OmniLight" parent="StreetLamp" groups=["Lights"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.1941, 1.91201 )
 light_color = Color( 0.8, 0.803922, 0.67451, 1 )
 light_energy = 2.0

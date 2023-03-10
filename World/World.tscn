@@ -32,5 +32,14 @@ __meta__ = {
 transform = Transform( -0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, -50, 75, -50 )
 
 [node name="AudioMenu" parent="." instance=ExtResource( 7 )]
+visible = false
+
+[node name="Sun" type="DirectionalLight" parent="."]
+transform = Transform( 0.720502, 0.692282, 0.0402953, -0.571993, 0.560448, 0.598934, 0.392047, -0.454581, 0.799784, 16.2853, 85.2061, -12.467 )
+light_energy = 2.0
+light_indirect_energy = 2.0
+shadow_enabled = true
+shadow_color = Color( 0.317647, 0.282353, 0.364706, 1 )
+directional_shadow_max_distance = 400.0
 
 [connection signal="cop_spawn" from="GridMap/ObjectSpawner" to="." method="_on_ObjectSpawner_cop_spawn"]
