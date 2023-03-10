@@ -27,12 +27,12 @@ align = 1
 [node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
 margin_top = 38.0
 margin_right = 1024.0
-margin_bottom = 294.0
+margin_bottom = 340.0
 
 [node name="GridContainer" type="GridContainer" parent="VBoxContainer/CenterContainer"]
 margin_left = 285.0
 margin_right = 738.0
-margin_bottom = 256.0
+margin_bottom = 302.0
 custom_constants/vseparation = 8
 custom_constants/hseparation = 16
 columns = 2
@@ -110,17 +110,31 @@ fixed_column_width = 120
 icon_mode = 0
 fixed_icon_size = Vector2( 64, 64 )
 
-[node name="HostButton" type="Button" parent="VBoxContainer/CenterContainer/GridContainer"]
-margin_top = 218.0
+[node name="ColorPickerLabel" type="Label" parent="VBoxContainer/CenterContainer/GridContainer"]
+margin_top = 220.0
 margin_right = 117.0
-margin_bottom = 256.0
-text = "Host Game"
+margin_bottom = 254.0
+text = "Car Color"
+align = 2
 
-[node name="JoinButton" type="Button" parent="VBoxContainer/CenterContainer/GridContainer"]
+[node name="ColorPickerButton" type="ColorPickerButton" parent="VBoxContainer/CenterContainer/GridContainer"]
 margin_left = 133.0
 margin_top = 218.0
 margin_right = 453.0
 margin_bottom = 256.0
+edit_alpha = false
+
+[node name="HostButton" type="Button" parent="VBoxContainer/CenterContainer/GridContainer"]
+margin_top = 264.0
+margin_right = 117.0
+margin_bottom = 302.0
+text = "Host Game"
+
+[node name="JoinButton" type="Button" parent="VBoxContainer/CenterContainer/GridContainer"]
+margin_left = 133.0
+margin_top = 264.0
+margin_right = 453.0
+margin_bottom = 302.0
 text = "Join Game"
 
 [node name="WaitingRoom" parent="." groups=["WaitingRoom"] instance=ExtResource( 1 )]
@@ -141,6 +155,7 @@ items = [ "Player 1", null, false, "Player 2", null, false ]
 [connection signal="tween_completed" from="LobbyBackground/Tween" to="." method="_on_Tween_tween_completed"]
 [connection signal="text_changed" from="VBoxContainer/CenterContainer/GridContainer/NameTextbox" to="." method="_on_NameTextbox_text_changed"]
 [connection signal="item_selected" from="VBoxContainer/CenterContainer/GridContainer/TeamCheck" to="." method="_on_TeamCheck_item_selected"]
+[connection signal="color_changed" from="VBoxContainer/CenterContainer/GridContainer/ColorPickerButton" to="." method="_on_ColorPickerButton_color_changed"]
 [connection signal="pressed" from="VBoxContainer/CenterContainer/GridContainer/HostButton" to="." method="_on_HostButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/CenterContainer/GridContainer/JoinButton" to="." method="_on_JoinButton_pressed"]
 [connection signal="pressed" from="WaitingRoom/VBoxContainer/ReadyButton" to="." method="_on_ReadyButton_pressed"]

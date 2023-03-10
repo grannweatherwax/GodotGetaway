@@ -238,3 +238,9 @@ Subsequent commits should reflect finer-grained changes to the code.
  * Making the Pivot turn
  * Improving team selection
  * Tweening
+ 
+ ### 59. Painting the Car
+ * Setting up a ColorPickerButton node
+ * Changing material values in code
+ 
+ 

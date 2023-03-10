@@ -74,6 +74,10 @@ func _on_Tween_tween_completed(object, key):
 	button.set_item_disabled(0, false)
 	button.set_item_disabled(1, false)
 
+func _on_ColorPickerButton_color_changed(color):
+	$LobbyBackground.new_color(color)
+
+
 
 
 
