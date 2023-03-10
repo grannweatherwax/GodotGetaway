@@ -17,7 +17,6 @@ signal player_disconnected
 signal server_disconnected
 
 var is_cop = false
-var paint_color = Color(1, 0.2, 1)
 
 func _ready():
 	get_tree().connect("network_peer_disconnected", self, "_on_player_disconnect")
@@ -55,7 +54,8 @@ func add_to_player_list():
 	players[local_player_id] = player_data
 	# add the key and value of "is_cop" to the player dictionary
 	players[local_player_id]["is_cop"] = is_cop
-	players[local_player_id]["paint_color"] = paint_color
+	# add paint_color to user data json
+	players[local_player_id]["paint_color"] = Saved.save_data["local_paint_color"]
 
 # handle actions when player has connected to the server
 func _connected_to_server():

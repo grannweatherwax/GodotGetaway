@@ -249,4 +249,9 @@ Subsequent commits should reflect finer-grained changes to the code.
  * Updating the color to match the player's choice
  * Sending that color over the network
  
+ ### 61. Saving Paint
+ * Replacing the Savegame.json
+ * Updating our existing scripts
+ * Making the saved color choices the default
+ 
  

@@ -10,6 +10,8 @@ func _ready():
 	NameTextBox.text = Saved.save_data["Player_name"]
 	sel_IP.text = Network.DEFAULT_IP
 	port.text = str(Network.DEFAULT_PORT)
+	# sets previously selected/default from json as pre-selected color
+	$VBoxContainer/CenterContainer/GridContainer/ColorPickerButton.color = Saved.save_data["local_paint_color"]
 
 # sets this player's machine as host for server
 func _on_HostButton_pressed():
@@ -59,7 +61,7 @@ func _on_ReadyButton_pressed():
 func _on_TeamCheck_toggled(button_pressed):
 	is_cop = button_pressed
 
-
+# handles rotating cop/robber cars as team selection is toggled
 func _on_TeamCheck_item_selected(index):
 	# if the is_cop variable is the same as the index boolean, do this
 	if not int(is_cop) == index:
@@ -74,9 +76,14 @@ func _on_Tween_tween_completed(object, key):
 	button.set_item_disabled(0, false)
 	button.set_item_disabled(1, false)
 
+# handles behavior when color is changed in ColorPickerButton
 func _on_ColorPickerButton_color_changed(color):
+	# run new_color function from LobbyBackground class, pass in color
 	$LobbyBackground.new_color(color)
-	Network.paint_color = color
+	# set color as html and assign to local_paint_color key in save_data
+	Saved.save_data["local_paint_color"] = color.to_html()
+	# run save_game method of Saved class
+	Saved.save_game()
 
 
 

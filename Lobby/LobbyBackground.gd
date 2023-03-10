@@ -1,10 +1,12 @@
 extends Spatial
 
 var paint
-var default_color = Color(0, 0, 0)
+var default_color
 
 func _ready():
 	make_material()
+	# set the default color to the last color saved within the user's json data file
+	default_color = Color(Saved.save_data["local_paint_color"])
 	apply_defaults()
 
 func pivot():
