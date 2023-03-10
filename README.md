@@ -268,4 +268,10 @@ Subsequent commits should reflect finer-grained changes to the code.
  * Using strings as integers
  * Using the given seed
  
+ ### 65. Audiobus
+ * Adding music to the game
+	* Making sure it's looping
+ * Creating a music player
+ * Looking at the Audiobus
+ 
  
