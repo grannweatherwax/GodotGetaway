@@ -315,4 +315,6 @@ Subsequent commits should reflect finer-grained changes to the code.
  * Create a particle for the exhaust
  * Have the exhaust react to the player speed
  
+ ### 75. Distance Fading a Texture
+ 
  
