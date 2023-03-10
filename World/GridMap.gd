@@ -32,6 +32,7 @@ func _ready():
 
 # assemble variables in prep for map generation
 func get_map_settings():
+	seed(Network.world_seed)
 	width = Network.city_size.x
 	height = Network.city_size.y
 

@@ -263,4 +263,9 @@ Subsequent commits should reflect finer-grained changes to the code.
  * Using a multiplier in prop placement
  * Adjusting the number of props for city size
  
+ ### 64. Map Seeds
+ * Getting the map seed from the player
+ * Using strings as integers
+ * Using the given seed
+ 
  

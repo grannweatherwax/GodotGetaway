@@ -20,6 +20,8 @@ var is_cop = false
 var city_size = Vector2()
 var prop_multiplier
 
+var world_seed
+
 func _ready():
 	get_tree().connect("network_peer_disconnected", self, "_on_player_disconnect")
 	get_tree().connect("network_peer_connected", self, "_on_player_connected")

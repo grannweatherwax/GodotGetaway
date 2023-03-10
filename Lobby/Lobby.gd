@@ -25,6 +25,8 @@ func _on_HostButton_pressed():
 	Network.create_server()
 	# set variable city_size in Network class to local value of city_size
 	Network.city_size = city_size
+	generate_city_seed()
+	# call the show() method for nodes in the HostOnly group
 	get_tree().call_group("HostOnly", "show")
 	# displays waiting room where joining players can be seen
 	create_waiting_room()
@@ -41,6 +43,15 @@ func _on_JoinButton_pressed():
 	Network.connect_to_server()
 	# displays waiting room where joining players can be seen
 	create_waiting_room()
+
+func generate_city_seed():
+	var world_seed = $VBoxContainer/CenterContainer/GridContainer/CitySeed.text
+	# convert city name text to hash value and set as world seed
+	if world_seed == "":
+		randomize()
+		Network.world_seed = randi()
+	else:
+		Network.world_seed = hash(world_seed)
 
 # saves player name updates as the text is entered in the box
 func _on_NameTextbox_text_changed(new_text):
