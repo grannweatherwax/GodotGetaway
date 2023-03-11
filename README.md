@@ -330,4 +330,8 @@ Subsequent commits should reflect finer-grained changes to the code.
  * Apply changed video settings
  * Save changed video settings
  
- 
+ ### 78. The Fancy Lobby
+ * Only show the options required for a host/client
+ * Put the player's name in neon on screen
+ * Make the lobby prettier
+ * Update the environment in the lobby

@@ -5,19 +5,23 @@ onready var port = $VBoxContainer/CenterContainer/GridContainer/PortTextbox
 onready var sel_IP = $VBoxContainer/CenterContainer/GridContainer/IPTextbox
 
 var is_cop = false
+var is_host = false
 var city_size
 var environment = "res://Environments/night.tres"
 
 func _ready():
 	NameTextBox.text = Saved.save_data["Player_name"]
+	$PlayerLabel.text = Saved.save_data["Player_name"] + "'s Garage"
 	sel_IP.text = Network.DEFAULT_IP
 	port.text = str(Network.DEFAULT_PORT)
 	_on_CitySizePicker_item_selected(1)
 	# sets previously selected/default from json as pre-selected color
 	$VBoxContainer/CenterContainer/GridContainer/ColorPickerButton.color = Saved.save_data["local_paint_color"]
+	get_tree().call_group("HostOnly", "hide")
+	get_tree().call_group("ClientOnly", "show")
 
 # sets this player's machine as host for server
-func _on_HostButton_pressed():
+func host_game():
 	# takes text entered in port textbox and sets it as the selected network port
 	Network.selected_port = int(port.text)
 	# stores the player's choice as cop or robber
@@ -34,7 +38,7 @@ func _on_HostButton_pressed():
 	create_waiting_room()
 
 # sets this player as a peer who has joined network server hosted by other player
-func _on_JoinButton_pressed():
+func join_game():
 	# takes text entered in port textbox and sets it as the selected network port
 	Network.selected_port = int(port.text)
 	# takes text entered in IP textbox and sets it as the selected network IP
@@ -61,6 +65,7 @@ func _on_NameTextbox_text_changed(new_text):
 	Saved.save_data["Player_name"] = NameTextBox.text
 	# saves new name data to game's save file
 	Saved.save_game()
+	$PlayerLabel.text = Saved.save_data["Player_name"] + "'s Garage"
 
 
 # function creates popup of the waiting room
@@ -125,18 +130,40 @@ func _on_TimeCheck_item_selected(index):
 			environment = "res://Environments/night.tres"
 		1:
 			environment = "res://Environments/day.tres"
-
-
-
-
-
-
-
-
-
-
-
-
+	get_tree().call_group("Cameras", "change_environment", environment)
 
 func _on_OptionsButton_pressed():
 	$InGameMenu.popup_centered()
+
+func _on_PlayButton_pressed():
+	if is_host:
+		host_game()
+	else:
+		join_game()
+
+func _on_HostToggle_item_selected(index):
+	is_host = index
+	if is_host:
+		get_tree().call_group("HostOnly", "show")
+		get_tree().call_group("ClientOnly", "hide")
+	else:
+		get_tree().call_group("HostOnly", "hide")
+		get_tree().call_group("ClientOnly", "show")
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
