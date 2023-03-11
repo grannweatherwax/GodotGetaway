@@ -317,4 +317,9 @@ Subsequent commits should reflect finer-grained changes to the code.
  
  ### 75. Distance Fading a Texture
  
+ ### 76. Options Menu, part 1
+ * Create an options menu
+ * Create a video options menu
+ * Instance the audio and video options menu into the options menu
+ 
  
