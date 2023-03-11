@@ -27,6 +27,7 @@ func _ready():
 	# the last thing you looked at is the global position of the camera target
 	# this helps the camera movement to move more smoothly
 	last_lookat = follow_this.global_transform.origin
+	check_saved_settings()
 
 func _physics_process(delta):
 	# if East_West_line has been defined, manage the audiobus levels
@@ -85,6 +86,63 @@ func manage_Bus_levels():
 	for i in range(3,7):
 		AudioServer.set_bus_mute(i, !neighborhood[i])
 
+# handle updating camera's field of view based on speed of vehicle follow
 func update_speed(speed):
 	fov = 70 + speed
 	fov = min(fov, MAX_CAMERA_ANGLE)
+
+# check and apply user's preferred settings for video
+func check_saved_settings():
+	if Saved.save_data["far_cam"]: 
+		far = 750
+	else: 
+		far = 250
+	# apply depth of field
+	environment.dof_blur_far_enabled = Saved.save_data["dof"]
+	# apply reflection setting
+	environment.ss_reflections_enabled = Saved.save_data["reflections"]
+	# apply fog setting
+	environment.fog_enabled = Saved.save_data["fog"]
+
+# handle updating the far_cam value in save data
+func far_cam(value):
+	if value: # if value is true
+		far = 250
+	else: # if value is false
+		far = 500
+	# set save data to passed in bool value
+	Saved.save_data["far_cam"] = value
+	# write new save data
+	Saved.save_game()
+
+# handle updating dof value in save data
+func dof(value):
+	# set environment to passed in bool value 
+	environment.dof_blur_far_enabled = value
+	# set save data to passed in bool value
+	Saved.save_data["dof"] = value
+	# write new save data
+	Saved.save_game()
+
+# handle updating reflections value in save data
+func reflections(value):
+	# set environment to passed in bool value 
+	environment.ss_reflections_enabled = value
+	# set save data to passed in bool value
+	Saved.save_data["reflections"] = value
+	# write new save data
+	Saved.save_game()
+
+# handle updating fog value in save data
+func fog(value):
+	# set environment to passed in bool value 
+	environment.fog_enabled = value
+	# set save data to passed in bool value
+	Saved.save_data["fog"] = value
+	# write new save data
+	Saved.save_game()
+
+
+
+
+

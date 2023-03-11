@@ -16,7 +16,12 @@ func get_data():
 				"local_paint_color": "FF6E2626", 
 				"master_volume": -10, 
 				"music_volume": -10, 
-				"sfx_volume": -10}
+				"sfx_volume": -10, 
+				"dof": false, 
+				"reflections": false, 
+				"fog": false, 
+				"particles": false, 
+				"far_cam": false}
 		save_game()
 	# Assign the data from SAVEGAME to the new file and read it
 	file.open(SAVEGAME, File.READ)

@@ -322,4 +322,12 @@ Subsequent commits should reflect finer-grained changes to the code.
  * Create a video options menu
  * Instance the audio and video options menu into the options menu
  
+ ### 77. Options Menu, part 2
+ * Put the Options Menu in the right places
+ * Connect the Options Menu buttons
+ * Connect the Video Options buttons
+ * Apply saved video settings
+ * Apply changed video settings
+ * Save changed video settings
+ 
  

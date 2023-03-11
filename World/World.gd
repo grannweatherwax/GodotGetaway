@@ -15,9 +15,9 @@ func _ready():
 
 func _input(event):
 	if Input.is_action_just_pressed("menu"):
-		$AudioMenu.visible = !$AudioMenu.visible
+		$InGameMenu.visible = !$InGameMenu.visible
 
-# spawn an instance of yourself on your own maching
+# spawn an instance of yourself on your own machine
 func spawn_local_player():
 	# create a new instance of the player scene (your car)
 	var new_player = preload("res://Player/Player.tscn").instance()
